@@ -127,6 +127,7 @@ class Curl implements HttpTransportInterface
     {
         $this->setOption(CURLOPT_CUSTOMREQUEST, $method)
             ->setOption(CURLOPT_POSTFIELDS, $body)
+            ->setOption(CURLOPT_HTTPHEADER, ['Content-Type:application/json'])
             ->setOption(CURLOPT_URL, $url)
             ->applyOptions();
 
