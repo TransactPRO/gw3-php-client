@@ -11,6 +11,7 @@
 
 namespace TransactPro\Gateway\Operations;
 
+use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\Http\Request;
 use TransactPro\Gateway\Interfaces\DataSetInterface;
 use TransactPro\Gateway\Interfaces\OperationInterface;
@@ -80,5 +81,24 @@ abstract class Operation implements OperationInterface
         foreach ($dataSets as $dataSet) {
             $this->data = array_merge($this->data, $dataSet->getRaw());
         }
+    }
+
+    /**
+     * Prepares request for inside-form
+     */
+    public function insideForm()
+    {
+        // payment data should be ignored by library validation,
+        // because on inside-form client will input this data
+        $ignoreFields = [
+            DataSet::PAYMENT_METHOD_DATA_PAN,
+            DataSet::PAYMENT_METHOD_DATA_EXPIRE,
+            DataSet::PAYMENT_METHOD_DATA_CVV,
+            DataSet::PAYMENT_METHOD_DATA_CARDHOLDER_NAME,
+        ];
+
+        $this->mandatoryFields = array_values(array_diff($this->mandatoryFields, $ignoreFields));
+
+        return $this;
     }
 }
