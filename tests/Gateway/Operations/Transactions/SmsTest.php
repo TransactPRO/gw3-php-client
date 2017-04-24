@@ -56,4 +56,16 @@ class SmsTest extends TestCase
 
         $sms->build();
     }
+
+    public function testSmsInsideForm()
+    {
+        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $sms->money()
+            ->setAmount(100)
+            ->setCurrency('EUR');
+
+        $raw = $sms->insideForm()->build();
+
+        $this->assertEquals($raw->getPath(), '/sms');
+    }
 }
