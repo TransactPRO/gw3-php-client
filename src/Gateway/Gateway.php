@@ -19,10 +19,12 @@ use TransactPro\Gateway\DataSets\Money;
 use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\DataSets\PaymentMethod;
 use TransactPro\Gateway\DataSets\System;
+use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Http\Client\Client;
 use TransactPro\Gateway\Http\Request;
 use TransactPro\Gateway\Http\Transport\Curl;
 use TransactPro\Gateway\Interfaces\HttpClientInterface;
+use TransactPro\Gateway\Interfaces\OperationInterface;
 use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
 use TransactPro\Gateway\Operations\Info\Result;
@@ -282,14 +284,49 @@ class Gateway
      */
     public function process(Request $request)
     {
-        $mergedPayload = array_merge($this->auth->getRaw(), $request->getData());
+        $payload = $request->getPreparedData();
 
+        if (empty($payload)) {
+            $payload = $this->generatePayload(array_merge($this->auth->getRaw(), $request->getData()));
+            $request->setPreparedData($payload);
+        }
+
+        return $this->httpClient->request($request->getMethod(), $request->getPath(), $payload);
+
+    }
+
+    /**
+     * Generate request generates Request object filled with data for processing
+     *
+     * @param OperationInterface $operation
+     * @throws ValidatorException
+     * @return Request
+     */
+    public function generateRequest(OperationInterface $operation)
+    {
+        $req = $operation->build();
+
+        $payload = $this->generatePayload(array_merge($this->auth->getRaw(), $req->getData()));
+
+        $req->setPreparedData($payload);
+
+        return $req;
+    }
+
+    /**
+     * Generate JSON string payload for the request.
+     *
+     * @param array $mergedPayload
+     * @return string
+     */
+    private function generatePayload(array $mergedPayload = [])
+    {
         $finalPayload = [];
         foreach ($mergedPayload as $k => $v) {
             $finalPayload = array_merge_recursive($finalPayload, $this->setByPath($k, $v));
         }
 
-        return $this->httpClient->request($request->getMethod(), $request->getPath(), json_encode($finalPayload));
+        return json_encode($finalPayload);
     }
 
     /**

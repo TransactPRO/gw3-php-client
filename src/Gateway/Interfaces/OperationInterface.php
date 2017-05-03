@@ -11,6 +11,7 @@
 
 namespace TransactPro\Gateway\Interfaces;
 
+use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Http\Request;
 
 /**
@@ -23,6 +24,7 @@ interface OperationInterface
     /**
      * Build build Request object
      *
+     * @throws ValidatorException
      * @return Request
      */
     public function build();

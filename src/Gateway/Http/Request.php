@@ -41,6 +41,13 @@ class Request
     private $data;
 
     /**
+     * Raw body that will be sent to the gateway (JSON string)
+     *
+     * @var string
+     */
+    private $preparedData;
+
+    /**
      * Request constructor.
      *
      * @param string $method HTTP method
@@ -77,10 +84,30 @@ class Request
     /**
      * Get request data.
      *
-     * @return string
+     * @return array
      */
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Set prepared JSON string.
+     *
+     * @param $preparedData string
+     */
+    public function setPreparedData($preparedData)
+    {
+        $this->preparedData = $preparedData;
+    }
+
+    /**
+     * Get prepared JSON string.
+     *
+     * @return string
+     */
+    public function getPreparedData()
+    {
+        return $this->preparedData;
     }
 }

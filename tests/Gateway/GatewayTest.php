@@ -14,6 +14,7 @@ namespace TransactPro\Gateway;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Auth;
 use TransactPro\Gateway\Exceptions\GatewayException;
+use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Interfaces\HttpClientInterface;
 use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
@@ -90,6 +91,7 @@ class GatewayTest extends TestCase
         $this->assertEquals('holy moly', $res->getBody());
         $this->assertEquals(200, $res->getStatusCode());
         $this->assertEquals('aaa', $res->getHeader('demo'));
+        $this->assertEquals("{\"data\":{\"command-data\":{\"gateway-transaction-ids\":[\"example-key\"]}}}", $req->getPreparedData());
     }
 
     public function testGatewayException()
@@ -102,5 +104,30 @@ class GatewayTest extends TestCase
         $req = $sms->build();
 
         $res = $gw->process($req);
+    }
+
+    public function testGenerateRequest()
+    {
+        $gw = new Gateway();
+
+        $status = $gw->createStatus();
+        $status->info()->setGatewayTransactionIDs(['example-key']);
+
+        $req = $gw->generateRequest($status);
+
+        $this->assertEquals('POST', $req->getMethod());
+        $this->assertEquals('/status', $req->getPath());
+        $this->assertEquals("{\"data\":{\"command-data\":{\"gateway-transaction-ids\":[\"example-key\"]}}}", $req->getPreparedData());
+    }
+
+    public function testGenerateRequestThrowException()
+    {
+        $this->expectException(ValidatorException::class);
+
+        $gw = new Gateway();
+
+        $status = $gw->createSms();
+
+        $gw->generateRequest($status);
     }
 }
