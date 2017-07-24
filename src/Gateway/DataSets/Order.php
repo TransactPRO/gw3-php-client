@@ -74,4 +74,16 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param string $merchantSideURL
+     *
+     * @return Order
+     */
+    public function setMerchantSideUrl(string $merchantSideURL): self
+    {
+        $this->data[self::GENERAL_DATA_ORDER_DATA_MERCHANT_SIDE_URL] = $merchantSideURL;
+
+        return $this;
+    }
 }

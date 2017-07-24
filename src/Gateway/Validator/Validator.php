@@ -37,6 +37,7 @@ class Validator
 
         // general data
         DataSet::GENERAL_DATA_CUSTOMER_DATA_EMAIL => 'string',
+        DataSet::GENERAL_DATA_CUSTOMER_DATA_PHONE => 'string',
         DataSet::GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_COUNTRY => 'string',
         DataSet::GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_STATE => 'string',
         DataSet::GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_CITY => 'string',
@@ -58,6 +59,7 @@ class Validator
         DataSet::GENERAL_DATA_ORDER_DATA_ORDER_ID => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_ORDER_DESCRIPTION => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_ORDER_META => 'array',
+        DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_SIDE_URL => 'string',
 
         // payment data
         DataSet::PAYMENT_METHOD_DATA_PAN => 'string',

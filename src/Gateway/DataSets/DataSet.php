@@ -27,6 +27,7 @@ abstract class DataSet
 
     // customer data
     const GENERAL_DATA_CUSTOMER_DATA_EMAIL = 'data.general-data.customer-data.email';
+    const GENERAL_DATA_CUSTOMER_DATA_PHONE = 'data.general-data.customer-data.phone';
     const GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_COUNTRY = 'data.general-data.customer-data.billing-address.country';
     const GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_STATE = 'data.general-data.customer-data.billing-address.state';
     const GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_CITY = 'data.general-data.customer-data.billing-address.city';
@@ -48,6 +49,7 @@ abstract class DataSet
     const GENERAL_DATA_ORDER_DATA_ORDER_ID = 'data.general-data.order-data.order-id';
     const GENERAL_DATA_ORDER_DATA_ORDER_DESCRIPTION = 'data.general-data.order-data.order-description';
     const GENERAL_DATA_ORDER_DATA_ORDER_META = 'data.general-data.order-data.order-meta';
+    const GENERAL_DATA_ORDER_DATA_MERCHANT_SIDE_URL = 'data.general-data.order-data.merchant-side-url';
 
     // payment data
     const PAYMENT_METHOD_DATA_PAN = 'data.payment-method-data.pan';

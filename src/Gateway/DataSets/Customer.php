@@ -32,6 +32,18 @@ class Customer extends DataSet implements DataSetInterface
     }
 
     /**
+     * @param string $phone
+     *
+     * @return Customer
+     */
+    public function setPhone(string $phone): self
+    {
+        $this->data[self::GENERAL_DATA_CUSTOMER_DATA_PHONE] = $phone;
+
+        return $this;
+    }
+
+    /**
      * @param  string   $country
      * @return Customer
      */
