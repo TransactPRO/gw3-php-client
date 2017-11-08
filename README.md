@@ -15,7 +15,7 @@ $ composer require transact-pro/gw3-client
 ```php
 <?php
 
-use TransactPro\Gateway;
+use TransactPro\Gateway\Gateway;
 
 $gw = new Gateway();
 
@@ -64,6 +64,8 @@ Available operations:
   - REFUND
   - REVERSAL
   - SMS
+  - Credit
+  - P2P
 - Information
   - HISTORY
   - RECURRENTS
@@ -76,7 +78,7 @@ Pattern to work with the library can be described as follows:
 ```php
 <?php
 
-use TransactPro\Gateway;
+use TransactPro\Gateway\Gateway;
 
 $gw = new Gateway();
 
@@ -111,9 +113,9 @@ If you need to access different API URL you can set through `Gateway` constructo
 ```php
 <?php
 
-use TransactPro\Gateway;
+use TransactPro\Gateway\Gateway;
 
-$gw = new Gateway('https://customurl.com')
+$gw = new Gateway('https://customurl.com');
 
 ```
 
@@ -122,7 +124,7 @@ Also, you can customize client for your needs. By default `Http\Client\Client` c
 ```php
 <?php
 
-use TransactPro\Gateway;
+use TransactPro\Gateway\Gateway;
 
 $httpClient = new MyClient(); // implements HttpClientInterface
 

@@ -30,10 +30,12 @@ use TransactPro\Gateway\Operations\Info\History;
 use TransactPro\Gateway\Operations\Info\Result;
 use TransactPro\Gateway\Operations\Info\Status;
 use TransactPro\Gateway\Operations\Transactions\Cancel;
+use TransactPro\Gateway\Operations\Transactions\Credit;
 use TransactPro\Gateway\Operations\Transactions\DmsCharge;
 use TransactPro\Gateway\Operations\Transactions\DmsHold;
 use TransactPro\Gateway\Operations\Transactions\MotoDms;
 use TransactPro\Gateway\Operations\Transactions\MotoSms;
+use TransactPro\Gateway\Operations\Transactions\P2P;
 use TransactPro\Gateway\Operations\Transactions\RecurrentDms;
 use TransactPro\Gateway\Operations\Transactions\RecurrentSms;
 use TransactPro\Gateway\Operations\Transactions\Refund;
@@ -183,6 +185,32 @@ class Gateway
     public function createMotoDms()
     {
         return new MotoDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+    }
+
+    /**
+     * Credit transaction request builder.
+     *
+     * Credit transaction request builder provide all
+     * needed methods to prepare request.
+     *
+     * @return Credit
+     */
+    public function createCredit()
+    {
+        return new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+    }
+
+    /**
+     * P2P transaction request builder.
+     *
+     * P2P transaction request builder provide all
+     * needed methods to prepare request.
+     *
+     * @return P2P
+     */
+    public function createP2P()
+    {
+        return new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
     }
 
     /**

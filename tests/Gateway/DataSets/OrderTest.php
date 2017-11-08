@@ -23,6 +23,7 @@ class OrderTest extends TestCase
             DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_TRANSACTION_ID => 'bbb',
             DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_USER_ID => 'ccc',
             DataSet::GENERAL_DATA_ORDER_DATA_ORDER_META => ['foo'],
+            DataSet::GENERAL_DATA_ORDER_DATA_RECIPIENT_NAME => 'qqq',
         ];
 
         $order = new Order();
@@ -31,6 +32,7 @@ class OrderTest extends TestCase
             ->setMerchantTransactionID('bbb')
             ->setMerchantUserID('ccc')
             ->setMeta(['foo'])
+            ->setRecipientName('qqq')
             ->getRaw();
 
         $this->assertEquals($expected, $raw);
