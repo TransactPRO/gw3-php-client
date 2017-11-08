@@ -45,7 +45,6 @@ class Credit extends Operation implements OperationInterface
     protected $mandatoryFields = [
         DataSet::PAYMENT_METHOD_DATA_PAN,
         DataSet::PAYMENT_METHOD_DATA_EXPIRE,
-        DataSet::PAYMENT_METHOD_DATA_CVV,
         DataSet::MONEY_DATA_AMOUNT,
         DataSet::MONEY_DATA_CURRENCY,
     ];

@@ -28,7 +28,6 @@ class CreditTest extends TestCase
         $expected = [
             DataSet::PAYMENT_METHOD_DATA_PAN => 'qwe123',
             DataSet::PAYMENT_METHOD_DATA_EXPIRE => '12/21',
-            DataSet::PAYMENT_METHOD_DATA_CVV => '123',
             DataSet::MONEY_DATA_AMOUNT => 100,
             DataSet::MONEY_DATA_CURRENCY => 'USD',
         ];
@@ -36,8 +35,7 @@ class CreditTest extends TestCase
         $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
         $order->paymentMethod()
             ->setPAN('qwe123')
-            ->setExpire('12/21')
-            ->setCVV('123');
+            ->setExpire('12/21');
         $order->money()
             ->setAmount(100)
             ->setCurrency('USD');
