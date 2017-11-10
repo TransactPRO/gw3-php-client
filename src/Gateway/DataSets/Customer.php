@@ -44,6 +44,18 @@ class Customer extends DataSet implements DataSetInterface
     }
 
     /**
+     * @param string $birthDate Format: MMDDYYYY
+     *
+     * @return Customer
+     */
+    public function setBirthDate(string $birthDate): self
+    {
+        $this->data[self::GENERAL_DATA_CUSTOMER_DATA_BIRTH_DATE] = $birthDate;
+
+        return $this;
+    }
+
+    /**
      * @param  string   $country
      * @return Customer
      */

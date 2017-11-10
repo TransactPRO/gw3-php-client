@@ -86,4 +86,16 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param  string $recipientName
+     *
+     * @return Order
+     */
+    public function setRecipientName(string $recipientName): self
+    {
+        $this->data[self::GENERAL_DATA_ORDER_DATA_RECIPIENT_NAME] = $recipientName;
+
+        return $this;
+    }
 }

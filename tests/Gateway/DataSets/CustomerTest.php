@@ -33,6 +33,8 @@ class CustomerTest extends TestCase
             DataSet::GENERAL_DATA_CUSTOMER_DATA_SHIPPING_ADDRESS_STATE => 'e',
             DataSet::GENERAL_DATA_CUSTOMER_DATA_SHIPPING_ADDRESS_STREET => 'f',
             DataSet::GENERAL_DATA_CUSTOMER_DATA_SHIPPING_ADDRESS_ZIP => 'g',
+            DataSet::GENERAL_DATA_CUSTOMER_DATA_PHONE => '123456789',
+            DataSet::GENERAL_DATA_CUSTOMER_DATA_BIRTH_DATE => '01021900',
         ];
 
         $customer = new Customer();
@@ -51,6 +53,8 @@ class CustomerTest extends TestCase
             ->setShippingAddressState('e')
             ->setShippingAddressStreet('f')
             ->setShippingAddressZIP('g')
+            ->setPhone('123456789')
+            ->setBirthDate('01021900')
             ->getRaw();
 
         $this->assertEquals($expected, $raw);
