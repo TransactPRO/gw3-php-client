@@ -33,6 +33,8 @@ use TransactPro\Gateway\Operations\Transactions\Cancel;
 use TransactPro\Gateway\Operations\Transactions\Credit;
 use TransactPro\Gateway\Operations\Transactions\DmsCharge;
 use TransactPro\Gateway\Operations\Transactions\DmsHold;
+use TransactPro\Gateway\Operations\Transactions\InitRecurrentDms;
+use TransactPro\Gateway\Operations\Transactions\InitRecurrentSms;
 use TransactPro\Gateway\Operations\Transactions\MotoDms;
 use TransactPro\Gateway\Operations\Transactions\MotoSms;
 use TransactPro\Gateway\Operations\Transactions\P2P;
@@ -211,6 +213,32 @@ class Gateway
     public function createP2P()
     {
         return new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+    }
+
+    /**
+     * Init Recurrent SMS transaction request builder.
+     *
+     * Init Recurrent SMS transaction request builder provide all
+     * needed methods to prepare request.
+     *
+     * @return InitRecurrentSms
+     */
+    public function createInitRecurrentSms()
+    {
+        return new InitRecurrentSms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+    }
+
+    /**
+     * Init Recurrent DMS HOLD transaction request builder.
+     *
+     * Init Recurrent DMS HOLD transaction request builder provide all
+     * needed methods to prepare request.
+     *
+     * @return InitRecurrentDms
+     */
+    public function createInitRecurrentDms()
+    {
+        return new InitRecurrentDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
     }
 
     /**

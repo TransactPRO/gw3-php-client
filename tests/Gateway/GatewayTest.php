@@ -24,6 +24,8 @@ use TransactPro\Gateway\Operations\Transactions\Cancel;
 use TransactPro\Gateway\Operations\Transactions\Credit;
 use TransactPro\Gateway\Operations\Transactions\DmsCharge;
 use TransactPro\Gateway\Operations\Transactions\DmsHold;
+use TransactPro\Gateway\Operations\Transactions\InitRecurrentDms;
+use TransactPro\Gateway\Operations\Transactions\InitRecurrentSms;
 use TransactPro\Gateway\Operations\Transactions\MotoDms;
 use TransactPro\Gateway\Operations\Transactions\MotoSms;
 use TransactPro\Gateway\Operations\Transactions\P2P;
@@ -39,6 +41,7 @@ class GatewayTest extends TestCase
     {
         $gw = new Gateway();
 
+        /** @var HttpClientInterface|\PHPUnit_Framework_MockObject_MockObject $httpClientStub */
         $httpClientStub = $this->createMock(HttpClientInterface::class);
         $httpClientStub->method('request')->willReturn(new class implements ResponseInterface {
             function getStatusCode(): int
@@ -78,6 +81,8 @@ class GatewayTest extends TestCase
         $this->assertInstanceOf(MotoDms::class, $gw->createMotoDms());
         $this->assertInstanceOf(Credit::class, $gw->createCredit());
         $this->assertInstanceOf(P2P::class, $gw->createP2P());
+        $this->assertInstanceOf(InitRecurrentSms::class, $gw->createInitRecurrentSms());
+        $this->assertInstanceOf(InitRecurrentDms::class, $gw->createInitRecurrentDms());
         $this->assertInstanceOf(RecurrentSms::class, $gw->createRecurrentSms());
         $this->assertInstanceOf(RecurrentDms::class, $gw->createRecurrentDms());
         $this->assertInstanceOf(Refund::class, $gw->createRefund());
@@ -107,7 +112,7 @@ class GatewayTest extends TestCase
         $sms = $gw->createSms();
         $req = $sms->build();
 
-        $res = $gw->process($req);
+        $gw->process($req);
     }
 
     public function testGenerateRequest()
