@@ -46,8 +46,6 @@ $response = $gw->process($smsRequest);
 
 This `README` provide introduction to the library usage.
 
-Read more about all gateway possibilities in the [Official documentation](http://transactpro.lv/docs/gw3-api-doc.pdf)
-
 ### Operations
 
 Operations are available via `$gw->create<operation name>()` method.

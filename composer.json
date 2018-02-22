@@ -1,6 +1,5 @@
 {
     "name": "transact-pro/gw3-client",
-    "version": "1.0.0",
     "description": "Library to work with Transact PRO gateway v3.0",
     "homepage": "https://github.com/TransactPRO/gw3-php-client",
     "type": "library",

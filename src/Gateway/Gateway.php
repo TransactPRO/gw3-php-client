@@ -57,7 +57,7 @@ class Gateway
      *
      * @var string
      */
-    private $url = 'https://api.transactpro.lv/v3.0';
+    private $url = 'https://api.sandbox.transactpro.io/v3.0';
 
     /**
      * HTTP Client.
