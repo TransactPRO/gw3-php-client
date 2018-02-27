@@ -1,3 +1,7 @@
+##### Version 1.1.1 (2018-02-27)
+
+	Minor fixes
+
 ##### Version 1.1.0 (2018-01-22)
 
 	Add new methods for init recurrent SMS and init recurrent DMS
