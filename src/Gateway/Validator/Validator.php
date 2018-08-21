@@ -77,6 +77,11 @@ class Validator
         // system
         DataSet::SYSTEM_USER_IP => 'string',
         DataSet::SYSTEM_X_FORWARDED_FOR => 'string',
+
+        // top level data
+        DataSet::DATA_TERMINAL_MID => 'string',
+        DataSet::DATA_CURRENCY => 'string',
+        DataSet::DATA_PAN => 'string',
     ];
 
     /**

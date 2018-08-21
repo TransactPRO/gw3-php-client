@@ -34,6 +34,7 @@ use TransactPro\Gateway\Operations\Transactions\RecurrentSms;
 use TransactPro\Gateway\Operations\Transactions\Refund;
 use TransactPro\Gateway\Operations\Transactions\Reversal;
 use TransactPro\Gateway\Operations\Transactions\Sms;
+use TransactPro\Gateway\Operations\Verify\Enrolled3D;
 
 class GatewayTest extends TestCase
 {
@@ -91,6 +92,8 @@ class GatewayTest extends TestCase
         $this->assertInstanceOf(Result::class, $gw->createResult());
         $this->assertInstanceOf(History::class, $gw->createHistory());
         $this->assertInstanceOf(Status::class, $gw->createStatus());
+
+        $this->assertInstanceOf(Enrolled3D::class, $gw->createVerify3dEnrollment());
 
         $status = $gw->createStatus();
         $status->info()->setGatewayTransactionIDs(['example-key']);

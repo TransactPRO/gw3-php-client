@@ -19,6 +19,7 @@ use TransactPro\Gateway\DataSets\Money;
 use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\DataSets\PaymentMethod;
 use TransactPro\Gateway\DataSets\System;
+use TransactPro\Gateway\DataSets\Verify3dEnrollment;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Http\Client\Client;
 use TransactPro\Gateway\Http\Request;
@@ -43,6 +44,7 @@ use TransactPro\Gateway\Operations\Transactions\RecurrentSms;
 use TransactPro\Gateway\Operations\Transactions\Refund;
 use TransactPro\Gateway\Operations\Transactions\Reversal;
 use TransactPro\Gateway\Operations\Transactions\Sms;
+use TransactPro\Gateway\Operations\Verify\Enrolled3D;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
@@ -330,6 +332,19 @@ class Gateway
     public function createStatus()
     {
         return new Status(new Validator(), new Info());
+    }
+
+    /**
+     * Verify 3D-Secure enrollment request builder.
+     *
+     * Verify 3D-Secure enrollment builder provide all
+     * needed methods to prepare request.
+     *
+     * @return Enrolled3D
+     */
+    public function createVerify3dEnrollment(): Enrolled3D
+    {
+        return new Enrolled3D(new Validator(), new Verify3dEnrollment());
     }
 
     /**
