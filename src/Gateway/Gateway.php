@@ -267,7 +267,7 @@ class Gateway
      */
     public function createRecurrentSms()
     {
-        return new RecurrentSms(new Validator(), new Money(), new Command());
+        return new RecurrentSms(new Validator(), new Money(), new Command(), new Order());
     }
 
     /**
@@ -280,7 +280,7 @@ class Gateway
      */
     public function createRecurrentDms()
     {
-        return new RecurrentDms(new Validator(), new Money(), new Command());
+        return new RecurrentDms(new Validator(), new Money(), new Command(), new Order());
     }
 
     /**

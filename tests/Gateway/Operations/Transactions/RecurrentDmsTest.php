@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Validator\Validator;
 
@@ -25,11 +26,13 @@ class RecurrentDmsTest extends TestCase
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'qwe123qwe',
             DataSet::MONEY_DATA_AMOUNT => 100,
+            DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_TRANSACTION_ID => 'qwerty',
         ];
 
-        $recurrentDms = new RecurrentDms(new Validator(), new Money(), new Command());
+        $recurrentDms = new RecurrentDms(new Validator(), new Money(), new Command(), new Order());
         $recurrentDms->command()->setGatewayTransactionID('qwe123qwe');
         $recurrentDms->money()->setAmount(100);
+        $recurrentDms->order()->setMerchantTransactionID('qwerty');
 
         $req = $recurrentDms->build();
 
@@ -42,7 +45,7 @@ class RecurrentDmsTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $recurrentDms = new RecurrentDms(new Validator(), new Money(), new Command());
+        $recurrentDms = new RecurrentDms(new Validator(), new Money(), new Command(), new Order());
 
         $recurrentDms->build();
     }
