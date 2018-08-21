@@ -30,6 +30,7 @@ use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
 use TransactPro\Gateway\Operations\Info\Result;
 use TransactPro\Gateway\Operations\Info\Status;
+use TransactPro\Gateway\Operations\Transactions\B2P;
 use TransactPro\Gateway\Operations\Transactions\Cancel;
 use TransactPro\Gateway\Operations\Transactions\Credit;
 use TransactPro\Gateway\Operations\Transactions\DmsCharge;
@@ -215,6 +216,19 @@ class Gateway
     public function createP2P()
     {
         return new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+    }
+
+    /**
+     * B2P transaction request builder.
+     *
+     * B2P transaction request builder provide all
+     * needed methods to prepare request.
+     *
+     * @return B2P
+     */
+    public function createB2P()
+    {
+        return new B2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
     }
 
     /**

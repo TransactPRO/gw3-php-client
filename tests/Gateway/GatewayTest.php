@@ -20,6 +20,7 @@ use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
 use TransactPro\Gateway\Operations\Info\Result;
 use TransactPro\Gateway\Operations\Info\Status;
+use TransactPro\Gateway\Operations\Transactions\B2P;
 use TransactPro\Gateway\Operations\Transactions\Cancel;
 use TransactPro\Gateway\Operations\Transactions\Credit;
 use TransactPro\Gateway\Operations\Transactions\DmsCharge;
@@ -82,6 +83,7 @@ class GatewayTest extends TestCase
         $this->assertInstanceOf(MotoDms::class, $gw->createMotoDms());
         $this->assertInstanceOf(Credit::class, $gw->createCredit());
         $this->assertInstanceOf(P2P::class, $gw->createP2P());
+        $this->assertInstanceOf(B2P::class, $gw->createB2P());
         $this->assertInstanceOf(InitRecurrentSms::class, $gw->createInitRecurrentSms());
         $this->assertInstanceOf(InitRecurrentDms::class, $gw->createInitRecurrentDms());
         $this->assertInstanceOf(RecurrentSms::class, $gw->createRecurrentSms());
