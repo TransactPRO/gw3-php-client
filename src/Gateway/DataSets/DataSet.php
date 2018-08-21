@@ -68,6 +68,11 @@ abstract class DataSet
     const SYSTEM_USER_IP = 'data.system.user-ip';
     const SYSTEM_X_FORWARDED_FOR = 'data.system.x-forwarded-for';
 
+    // data
+    const DATA_TERMINAL_MID = 'data.terminal-mid';
+    const DATA_CURRENCY = 'data.currency';
+    const DATA_PAN = 'data.pan';
+
     /**
      * @var array
      */

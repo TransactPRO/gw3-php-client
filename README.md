@@ -66,12 +66,15 @@ Available operations:
   - SMS
   - Credit
   - P2P
+  - B2P
 - Information
   - HISTORY
   - RECURRENTS
   - REFUNDS
   - RESULT
   - STATUS
+- Verification
+  - 3-D Secure enrollment
 
 Pattern to work with the library can be described as follows:
 
