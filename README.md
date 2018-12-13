@@ -21,7 +21,7 @@ $gw = new Gateway();
 
 // first, you need to setup authorization
 $gw->auth()
-    ->setAccountID(1)
+    ->setAccountGUID("3383e58e-9cde-4ffa-85cf-81cd25b2423e")
     ->setSecretKey('super-secret-key');
 
 $sms = $gw->createSms();
@@ -90,7 +90,7 @@ $gw = new Gateway();
 // Thus, following operations will work under
 // new authorization.
 $gw->auth()
-    ->setAccountID(1)
+    ->setAccountGUID("3383e58e-9cde-4ffa-85cf-81cd25b2423e")
     ->setSecretKey('super-secret-key');
 
 $operation = $gw->createOPERATION();
