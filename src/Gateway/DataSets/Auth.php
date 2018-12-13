@@ -21,12 +21,13 @@ use TransactPro\Gateway\Interfaces\DataSetInterface;
 class Auth extends DataSet implements DataSetInterface
 {
     /**
-     * @param  int  $accountID
+     * @param string $accountGUID
+     *
      * @return Auth
      */
-    public function setAccountID(int $accountID): self
+    public function setAccountGUID(string $accountGUID): self
     {
-        $this->data[self::AUTH_DATA_ACCOUNT_ID] = $accountID;
+        $this->data[self::AUTH_DATA_ACCOUNT_GUID] = $accountGUID;
 
         return $this;
     }

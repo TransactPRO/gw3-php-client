@@ -14,7 +14,7 @@ namespace TransactPro\Gateway\DataSets;
 abstract class DataSet
 {
     // auth data
-    const AUTH_DATA_ACCOUNT_ID = 'auth-data.account-id';
+    const AUTH_DATA_ACCOUNT_GUID = 'auth-data.account-guid';
     const AUTH_DATA_SECRET_KEY = 'auth-data.secret-key';
     const AUTH_DATA_SESSION_ID = 'auth-data.session-id';
 

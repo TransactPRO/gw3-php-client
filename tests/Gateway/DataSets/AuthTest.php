@@ -18,13 +18,13 @@ class AuthTest extends TestCase
     public function testSuccess()
     {
         $expected = [
-            DataSet::AUTH_DATA_ACCOUNT_ID => 1,
-            DataSet::AUTH_DATA_SECRET_KEY => 'aaaa',
-            DataSet::AUTH_DATA_SESSION_ID => 'foo',
+            DataSet::AUTH_DATA_ACCOUNT_GUID => '3383e58e-9cde-4ffa-85cf-81cd25b2423e',
+            DataSet::AUTH_DATA_SECRET_KEY   => 'aaaa',
+            DataSet::AUTH_DATA_SESSION_ID   => 'foo',
         ];
 
         $auth = new Auth();
-        $generated = $auth->setAccountID(1)
+        $generated = $auth->setAccountGUID('3383e58e-9cde-4ffa-85cf-81cd25b2423e')
             ->setSecretKey('aaaa')
             ->setSessionID('foo')
             ->getRaw();
