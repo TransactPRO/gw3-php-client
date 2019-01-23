@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Validator\Validator;
 
@@ -25,15 +26,19 @@ class DmsChargeTest extends TestCase
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => "qwe",
             DataSet::MONEY_DATA_AMOUNT => 100,
+            DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_TRANSACTION_ID => "ytrewq",
         ];
 
-        $dmsCharge = new DmsCharge(new Validator(), new Money(), new Command());
+        $dmsCharge = new DmsCharge(new Validator(), new Money(), new Command(), new Order());
 
         $dmsCharge->command()
             ->setGatewayTransactionID("qwe");
 
         $dmsCharge->money()
             ->setAmount(100);
+
+        $dmsCharge->order()
+            ->setMerchantTransactionID("ytrewq");
 
         $req = $dmsCharge->build();
 
@@ -46,7 +51,7 @@ class DmsChargeTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $dmsCharge = new DmsCharge(new Validator(), new Money(), new Command());
+        $dmsCharge = new DmsCharge(new Validator(), new Money(), new Command(), new Order());
 
         $dmsCharge->command()
             ->setGatewayTransactionID("qwe");

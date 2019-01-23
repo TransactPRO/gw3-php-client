@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Validator\Validator;
 
@@ -25,12 +26,14 @@ class RefundTest extends TestCase
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'qwe123',
             DataSet::MONEY_DATA_AMOUNT => 100,
+            DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_TRANSACTION_ID => "ytrewq",
         ];
 
-        $refund = new Refund(new Validator(), new Money(), new Command());
+        $refund = new Refund(new Validator(), new Money(), new Command(), new Order());
 
         $refund->command()->setGatewayTransactionID('qwe123');
         $refund->money()->setAmount(100);
+        $refund->order()->setMerchantTransactionID("ytrewq");
 
         $res = $refund->build();
 
@@ -43,7 +46,7 @@ class RefundTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $refund = new Refund(new Validator(), new Money(), new Command());
+        $refund = new Refund(new Validator(), new Money(), new Command(), new Order());
 
         $refund->build();
     }

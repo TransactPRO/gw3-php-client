@@ -14,6 +14,7 @@ namespace TransactPro\Gateway\Operations\Transactions;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Interfaces\OperationInterface;
 use TransactPro\Gateway\Operations\Operation;
 use TransactPro\Gateway\Validator\Validator;
@@ -55,19 +56,27 @@ class DmsCharge extends Operation implements OperationInterface
     private $command;
 
     /**
+     * @var Order
+     */
+    private $order;
+
+    /**
      * DmsCharge constructor.
+     *
      * @param Validator $validator
      * @param Money     $money
      * @param Command   $command
+     * @param Order     $order
      */
-    public function __construct(Validator $validator, Money $money, Command $command)
+    public function __construct(Validator $validator, Money $money, Command $command, Order $order)
     {
         $this->validator = $validator;
 
         $this->money = $money;
         $this->command = $command;
+        $this->order = $order;
 
-        $this->dataSets = [$this->money, $this->command];
+        $this->dataSets = [$this->money, $this->command, $this->order];
     }
 
     /**
@@ -84,5 +93,13 @@ class DmsCharge extends Operation implements OperationInterface
     public function money()
     {
         return $this->money;
+    }
+
+    /**
+     * @return Order
+     */
+    public function order()
+    {
+        return $this->order;
     }
 }

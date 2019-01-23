@@ -13,6 +13,7 @@ namespace TransactPro\Gateway\Operations\Transactions;
 
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Interfaces\OperationInterface;
 use TransactPro\Gateway\Operations\Operation;
 use TransactPro\Gateway\Validator\Validator;
@@ -48,18 +49,25 @@ class Cancel extends Operation implements OperationInterface
     private $command;
 
     /**
+     * @var Order
+     */
+    private $order;
+
+    /**
      * Cancel constructor.
      *
      * @param Validator $validator
      * @param Command   $command
+     * @param Order     $order
      */
-    public function __construct(Validator $validator, Command $command)
+    public function __construct(Validator $validator, Command $command, Order $order)
     {
         $this->validator = $validator;
 
         $this->command = $command;
+        $this->order = $order;
 
-        $this->dataSets = [$this->command];
+        $this->dataSets = [$this->command, $this->order];
     }
 
     /**
@@ -68,5 +76,13 @@ class Cancel extends Operation implements OperationInterface
     public function command()
     {
         return $this->command;
+    }
+
+    /**
+     * @return Order
+     */
+    public function order()
+    {
+        return $this->order;
     }
 }
