@@ -150,7 +150,7 @@ class Gateway
      */
     public function createDmsCharge()
     {
-        return new DmsCharge(new Validator(), new Money(), new Command());
+        return new DmsCharge(new Validator(), new Money(), new Command(), new Order());
     }
 
     /**
@@ -163,7 +163,7 @@ class Gateway
      */
     public function createCancel()
     {
-        return new Cancel(new Validator(), new Command());
+        return new Cancel(new Validator(), new Command(), new Order());
     }
 
     /**
@@ -293,7 +293,7 @@ class Gateway
      */
     public function createRefund()
     {
-        return new Refund(new Validator(), new Money(), new Command());
+        return new Refund(new Validator(), new Money(), new Command(), new Order());
     }
 
     /**
@@ -306,7 +306,7 @@ class Gateway
      */
     public function createReversal()
     {
-        return new Reversal(new Validator(), new Command());
+        return new Reversal(new Validator(), new Command(), new Order());
     }
 
     /**

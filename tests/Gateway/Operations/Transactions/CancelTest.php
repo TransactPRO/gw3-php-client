@@ -14,6 +14,7 @@ namespace TransactPro\Gateway\Operations\Transactions;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Validator\Validator;
 
@@ -25,14 +26,18 @@ class CancelTest extends TestCase
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => "qwe",
             DataSet::COMMAND_DATA_FORM_ID => "zxc",
             DataSet::COMMAND_DATA_TERMINAL_MID => "asd",
+            DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_TRANSACTION_ID => "ytrewq",
         ];
 
-        $cancel = new Cancel(new Validator(), new Command());
+        $cancel = new Cancel(new Validator(), new Command(), new Order());
 
         $cancel->command()
             ->setGatewayTransactionID("qwe")
             ->setFormID("zxc")
             ->setTerminalMID("asd");
+
+        $cancel->order()
+            ->setMerchantTransactionID("ytrewq");
 
         $req = $cancel->build();
 
@@ -45,7 +50,7 @@ class CancelTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $cancel = new Cancel(new Validator(), new Command());
+        $cancel = new Cancel(new Validator(), new Command(), new Order());
 
         $cancel->command()
             ->setFormID("zxc")

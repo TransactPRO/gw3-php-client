@@ -14,6 +14,7 @@ namespace TransactPro\Gateway\Operations\Transactions;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
+use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Validator\Validator;
 
@@ -23,13 +24,15 @@ class ReversalTest extends TestCase
     {
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'qwe123',
+            DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_TRANSACTION_ID => "ytrewq",
         ];
 
-        $refund = new Reversal(new Validator(), new Command());
+        $reversal = new Reversal(new Validator(), new Command(), new Order());
 
-        $refund->command()->setGatewayTransactionID('qwe123');
+        $reversal->command()->setGatewayTransactionID('qwe123');
+        $reversal->order()->setMerchantTransactionID("ytrewq");
 
-        $res = $refund->build();
+        $res = $reversal->build();
 
         $this->assertEquals("POST", $res->getMethod());
         $this->assertEquals("/reversal", $res->getPath());
@@ -40,8 +43,8 @@ class ReversalTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $refund = new Reversal(new Validator(), new Command());
+        $reversal = new Reversal(new Validator(), new Command(), new Order());
 
-        $refund->build();
+        $reversal->build();
     }
 }
