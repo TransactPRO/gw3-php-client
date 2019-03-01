@@ -98,4 +98,15 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param  string $merchantReferringName
+     * @return Order
+     */
+    public function setMerchantReferringName(string $merchantReferringName): self
+    {
+        $this->data[self::GENERAL_DATA_ORDER_DATA_MERCHANT_REFERRING_NAME] = $merchantReferringName;
+
+        return $this;
+    }
 }
