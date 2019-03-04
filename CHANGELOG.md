@@ -1,3 +1,7 @@
+##### Version 1.3.2 (2019-03-04)
+
+	Add merchant-referring-name fields to an order.
+
 ##### Version 1.3.1 (2019-01-23)
 
 	Added possibility to send mercahnt transaction ID for some methods to meet
