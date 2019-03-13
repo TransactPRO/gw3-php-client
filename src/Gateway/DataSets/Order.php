@@ -109,4 +109,16 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param string $custom3dReturnUrl
+     *
+     * @return Order
+     */
+    public function setCustom3dReturnUrl(string $custom3dReturnUrl): self
+    {
+        $this->data[ self::GENERAL_DATA_ORDER_DATA_CUSTOM_3D_RETURN_URL ] = $custom3dReturnUrl;
+
+        return $this;
+    }
 }
