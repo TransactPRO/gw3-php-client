@@ -1,7 +1,3 @@
-##### Version 1.3.3 (2019-03-13)
-
-	Add custom-3d-return-url field to an order.
-		
 ##### Version 1.3.2 (2019-03-04)
 
 	Add merchant-referring-name fields to an order.
