@@ -25,6 +25,7 @@ class OrderTest extends TestCase
             DataSet::GENERAL_DATA_ORDER_DATA_ORDER_META => ['foo'],
             DataSet::GENERAL_DATA_ORDER_DATA_RECIPIENT_NAME => 'qqq',
             DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_REFERRING_NAME => 'www',
+            DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_3D_RETURN_URL => 'hhh',
         ];
 
         $order = new Order();
@@ -35,6 +36,7 @@ class OrderTest extends TestCase
             ->setMeta(['foo'])
             ->setRecipientName('qqq')
             ->setMerchantReferringName('www')
+            ->setCustom3dReturnUrl('hhh')
             ->getRaw();
 
         $this->assertEquals($expected, $raw);

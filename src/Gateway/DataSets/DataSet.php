@@ -53,6 +53,7 @@ abstract class DataSet
     const GENERAL_DATA_ORDER_DATA_MERCHANT_SIDE_URL = 'data.general-data.order-data.merchant-side-url';
     const GENERAL_DATA_ORDER_DATA_RECIPIENT_NAME = 'data.general-data.order-data.recipient-name';
     const GENERAL_DATA_ORDER_DATA_MERCHANT_REFERRING_NAME = 'data.general-data.order-data.merchant-referring-name';
+    const GENERAL_DATA_ORDER_DATA_CUSTOM_3D_RETURN_URL = 'data.general-data.order-data.custom-3d-return-url';
 
     // payment data
     const PAYMENT_METHOD_DATA_PAN = 'data.payment-method-data.pan';

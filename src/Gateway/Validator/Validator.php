@@ -63,6 +63,7 @@ class Validator
         DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_SIDE_URL => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_RECIPIENT_NAME => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_REFERRING_NAME => 'string',
+        DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_3D_RETURN_URL => 'string',
 
         // payment data
         DataSet::PAYMENT_METHOD_DATA_PAN => 'string',
