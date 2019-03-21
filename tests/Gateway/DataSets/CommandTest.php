@@ -21,12 +21,14 @@ class CommandTest extends TestCase
             DataSet::COMMAND_DATA_FORM_ID => 'a',
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'b',
             DataSet::COMMAND_DATA_TERMINAL_MID => 'c',
+            DataSet::COMMAND_DATA_CARD_VERIFICATION => 123,
         ];
 
         $command = new Command();
         $raw = $command->setFormID('a')
             ->setGatewayTransactionID('b')
             ->setTerminalMID('c')
+            ->setCardVerificationMode(123)
             ->getRaw();
 
         $this->assertEquals($expected, $raw);

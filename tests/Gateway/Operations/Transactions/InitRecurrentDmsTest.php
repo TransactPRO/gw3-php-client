@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Operations\Transactions;
 
 use PHPUnit\Framework\TestCase;
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -35,7 +36,7 @@ class InitRecurrentDmsTest extends TestCase
             DataSet::SYSTEM_USER_IP => '127.0.0.1',
         ];
 
-        $dms = new InitRecurrentDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $dms = new InitRecurrentDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $dms->paymentMethod()->setPAN('123')
             ->setCVV('123')

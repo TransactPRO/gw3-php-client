@@ -84,6 +84,7 @@ class Validator
         DataSet::DATA_TERMINAL_MID => 'string',
         DataSet::DATA_CURRENCY => 'string',
         DataSet::DATA_PAN => 'string',
+        DataSet::DATA_GATEWAY_TRANSACTION_ID => 'string',
     ];
 
     /**
