@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Operations\Transactions;
 
 use PHPUnit\Framework\TestCase;
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -32,7 +33,7 @@ class CreditTest extends TestCase
             DataSet::MONEY_DATA_CURRENCY => 'USD',
         ];
 
-        $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $order->paymentMethod()
             ->setPAN('qwe123')
             ->setExpire('12/21');
@@ -51,14 +52,14 @@ class CreditTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $order->build();
     }
 
     public function testCreditInsideForm()
     {
-        $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $order = new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $order->money()
             ->setAmount(100)
             ->setCurrency('EUR');

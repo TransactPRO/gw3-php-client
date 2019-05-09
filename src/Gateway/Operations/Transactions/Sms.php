@@ -11,6 +11,7 @@
 
 namespace TransactPro\Gateway\Operations\Transactions;
 
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -76,15 +77,22 @@ class Sms extends Operation implements OperationInterface
     private $system;
 
     /**
+     * @var Command
+     */
+    private $command;
+
+    /**
      * Sms constructor.
+     *
      * @param Validator     $validator
      * @param PaymentMethod $paymentMethod
      * @param Money         $money
      * @param Customer      $customer
      * @param Order         $order
      * @param System        $system
+     * @param Command       $command
      */
-    public function __construct(Validator $validator, PaymentMethod $paymentMethod, Money $money, Customer $customer, Order $order, System $system)
+    public function __construct(Validator $validator, PaymentMethod $paymentMethod, Money $money, Customer $customer, Order $order, System $system, Command $command)
     {
         $this->validator = $validator;
 
@@ -93,8 +101,9 @@ class Sms extends Operation implements OperationInterface
         $this->customer = $customer;
         $this->order = $order;
         $this->system = $system;
+        $this->command = $command;
 
-        $this->dataSets = [$this->paymentMethod, $this->money, $this->customer, $this->order, $this->system];
+        $this->dataSets = [$this->paymentMethod, $this->money, $this->customer, $this->order, $this->system, $this->command];
     }
 
     /**
@@ -135,5 +144,13 @@ class Sms extends Operation implements OperationInterface
     public function system()
     {
         return $this->system;
+    }
+
+    /**
+     * @return Command
+     */
+    public function command()
+    {
+        return $this->command;
     }
 }
