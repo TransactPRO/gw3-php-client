@@ -1,3 +1,7 @@
+##### Version 1.4.0 (2019-05-09)
+
+	Add card verification request.
+
 ##### Version 1.3.3 (2019-03-21)
 
 	Add support of custom 3D Secure return url

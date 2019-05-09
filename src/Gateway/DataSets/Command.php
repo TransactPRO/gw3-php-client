@@ -20,6 +20,9 @@ use TransactPro\Gateway\Interfaces\DataSetInterface;
  */
 class Command extends DataSet implements DataSetInterface
 {
+    const CARD_VERIFICATION_MODE_INIT = 1;
+    const CARD_VERIFICATION_MODE_VERIFY = 2;
+
     /**
      * @param  string  $gatewayTransactionID
      * @return Command
@@ -49,6 +52,17 @@ class Command extends DataSet implements DataSetInterface
     public function setTerminalMID(string $terminalMID): self
     {
         $this->data[self::COMMAND_DATA_TERMINAL_MID] = $terminalMID;
+
+        return $this;
+    }
+
+    /**
+     * @param  int $cardVerificationMode
+     * @return Command
+     */
+    public function setCardVerificationMode(int $cardVerificationMode): self
+    {
+        $this->data[self::COMMAND_DATA_CARD_VERIFICATION] = $cardVerificationMode;
 
         return $this;
     }

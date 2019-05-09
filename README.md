@@ -125,6 +125,7 @@ Available operations:
   - STATUS
 - Verification
   - 3-D Secure enrollment
+  - Complete card verification
 
 Pattern to work with the library can be described as follows:
 
@@ -157,6 +158,26 @@ $operationRequest = $operation->build();
 // `$response` will have response data (headers, body).
 $response = $gw->process($operationRequest);
 
+```
+
+### Card verification
+
+```php
+<?php
+
+use TransactPro\Gateway\DataSets\Command;
+
+// create a payment to init card verification process
+$message->command()->setCardVerificationMode(Command::CARD_VERIFICATION_MODE_INIT);
+
+// complete card verification
+$operation = $gw->createCardVerification();
+$operation->data()->setGatewayTransactionID($initialResponseGatewayTransactionId);
+$operationRequest = $operation->build();
+$response = $gw->process($request);
+
+// send a payment with flag to accept only verified cards
+$message->command()->setCardVerificationMode(Command::CARD_VERIFICATION_MODE_VERIFY);
 ```
 
 ### Customization

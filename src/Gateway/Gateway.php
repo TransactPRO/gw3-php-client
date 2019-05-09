@@ -20,6 +20,7 @@ use TransactPro\Gateway\DataSets\Order;
 use TransactPro\Gateway\DataSets\PaymentMethod;
 use TransactPro\Gateway\DataSets\System;
 use TransactPro\Gateway\DataSets\Verify3dEnrollment;
+use TransactPro\Gateway\DataSets\VerifyCardData;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Http\Client\Client;
 use TransactPro\Gateway\Http\Request;
@@ -46,6 +47,7 @@ use TransactPro\Gateway\Operations\Transactions\Refund;
 use TransactPro\Gateway\Operations\Transactions\Reversal;
 use TransactPro\Gateway\Operations\Transactions\Sms;
 use TransactPro\Gateway\Operations\Verify\Enrolled3D;
+use TransactPro\Gateway\Operations\Verify\VerifyCard;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
@@ -124,7 +126,7 @@ class Gateway
      */
     public function createSms()
     {
-        return new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -137,7 +139,7 @@ class Gateway
      */
     public function createDmsHold()
     {
-        return new DmsHold(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new DmsHold(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -202,7 +204,7 @@ class Gateway
      */
     public function createCredit()
     {
-        return new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new Credit(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -215,7 +217,7 @@ class Gateway
      */
     public function createP2P()
     {
-        return new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -228,7 +230,7 @@ class Gateway
      */
     public function createB2P()
     {
-        return new B2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new B2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -241,7 +243,7 @@ class Gateway
      */
     public function createInitRecurrentSms()
     {
-        return new InitRecurrentSms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new InitRecurrentSms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -254,7 +256,7 @@ class Gateway
      */
     public function createInitRecurrentDms()
     {
-        return new InitRecurrentDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        return new InitRecurrentDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
     }
 
     /**
@@ -362,10 +364,25 @@ class Gateway
     }
 
     /**
+     * Card verification completion request builder.
+     *
+     * Card verification completion builder provide all
+     * needed methods to prepare request.
+     *
+     * @return VerifyCard
+     */
+    public function createCardVerification(): VerifyCard
+    {
+        return new VerifyCard(new Validator(), new VerifyCardData());
+    }
+
+    /**
      * Process prepares and apply provided request
      *
-     * @param  Request           $request
+     * @param  Request $request
+     *
      * @return ResponseInterface
+     * @throws Exceptions\RequestException
      */
     public function process(Request $request)
     {
@@ -446,11 +463,6 @@ class Gateway
      */
     private function explode(string $path): array
     {
-        $sPattern = '/\w+((\.\w+)+)?/';
-
-        if (!preg_match($sPattern, $path)) {
-        }
-
         return explode('.', $path);
     }
 }

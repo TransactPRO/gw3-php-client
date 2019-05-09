@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Operations\Transactions;
 
 use PHPUnit\Framework\TestCase;
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -33,7 +34,7 @@ class SmsTest extends TestCase
             DataSet::MONEY_DATA_CURRENCY => 'USD',
         ];
 
-        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $sms->paymentMethod()
             ->setPAN('qwe123')
             ->setExpire('12/21')
@@ -52,14 +53,14 @@ class SmsTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $sms->build();
     }
 
     public function testSmsInsideForm()
     {
-        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $sms->money()
             ->setAmount(100)
             ->setCurrency('EUR');

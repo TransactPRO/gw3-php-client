@@ -24,6 +24,7 @@ abstract class DataSet
     const COMMAND_DATA_MERCHANT_TRANSACTION_IDS = 'data.command-data.merchant-transaction-ids';
     const COMMAND_DATA_FORM_ID = 'data.command-data.form-id';
     const COMMAND_DATA_TERMINAL_MID = 'data.command-data.terminal-mid';
+    const COMMAND_DATA_CARD_VERIFICATION = 'data.command-data.card-verification';
 
     // customer data
     const GENERAL_DATA_CUSTOMER_DATA_EMAIL = 'data.general-data.customer-data.email';
@@ -74,6 +75,7 @@ abstract class DataSet
     const DATA_TERMINAL_MID = 'data.terminal-mid';
     const DATA_CURRENCY = 'data.currency';
     const DATA_PAN = 'data.pan';
+    const DATA_GATEWAY_TRANSACTION_ID = 'data.gateway-transaction-id';
 
     /**
      * @var array

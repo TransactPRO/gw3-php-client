@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Operations\Transactions;
 
 use PHPUnit\Framework\TestCase;
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -36,7 +37,7 @@ class DmsHoldTest extends TestCase
             DataSet::SYSTEM_USER_IP => '127.0.0.1',
         ];
 
-        $dms = new DmsHold(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $dms = new DmsHold(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $dms->paymentMethod()->setPAN('123')
             ->setCVV('123')
@@ -62,7 +63,7 @@ class DmsHoldTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $dms = new DmsHold(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $dms = new DmsHold(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $dms->build();
     }

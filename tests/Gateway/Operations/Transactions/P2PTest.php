@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Operations\Transactions;
 
 use PHPUnit\Framework\TestCase;
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -34,7 +35,7 @@ class P2PTest extends TestCase
             DataSet::GENERAL_DATA_CUSTOMER_DATA_BIRTH_DATE => '01021900',
         ];
 
-        $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $order->paymentMethod()
             ->setPAN('qwe123')
             ->setExpire('12/21');
@@ -57,14 +58,14 @@ class P2PTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $order->build();
     }
 
     public function testP2PInsideForm()
     {
-        $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $order->money()
             ->setAmount(100)
             ->setCurrency('EUR');
