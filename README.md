@@ -12,6 +12,10 @@ $ composer require transact-pro/gw3-client
 
 ## Basic usage
 
+### Inside form
+
+Hold card input form on gateway side, client must be redirect to gateway.
+
 ```php
 <?php
 
@@ -19,25 +23,71 @@ use TransactPro\Gateway\Gateway;
 
 $gw = new Gateway();
 
-// first, you need to setup authorization
+// Setup gateway authorization credentials
 $gw->auth()
     ->setAccountGUID("3383e58e-9cde-4ffa-85cf-81cd25b2423e")
     ->setSecretKey('super-secret-key');
 
+// Create transaction object
 $sms = $gw->createSms();
 
+// Set required fields
+$sms->money()
+    ->setAmount(100)
+    ->setCurrency('USD');
+
+$sms->customer()
+    ->setEmail("email@domain.com")
+    ->setPhone("2445224657");
+
+$sms->order()
+    ->setMerchantTransactionID('A-345S')
+    ->setDescription('Order #A-345S payment');
+
+// Process payment via gateway inside form
+$sms->insideForm();
+
+// Build transaction object to request
+$smsRequest = $sms->build();
+
+// Process transaction to gateway
+$response = $gw->process($smsRequest);
+
+```
+
+### Server to server
+
+Hold card input form on merchant side and process via API.
+
+```php
+<?php
+
+use TransactPro\Gateway\Gateway;
+
+$gw = new Gateway();
+
+// Setup gatewayl authorization credentials
+$gw->auth()
+    ->setAccountGUID("3383e58e-9cde-4ffa-85cf-81cd25b2423e")
+    ->setSecretKey('super-secret-key');
+
+// Create transaction object
+$sms = $gw->createSms();
+
+// Set required fields
 $sms->paymentMethod()
     ->setPAN('4295550031781065')
     ->setExpire('06/18')
     ->setCVV('683')
     ->setCardHolderName('John Doe');
-
 $sms->money()
     ->setAmount(100)
     ->setCurrency('USD');
 
+// Build transaction object to request
 $smsRequest = $sms->build();
 
+// Process transaction to gateway
 $response = $gw->process($smsRequest);
 
 ```
