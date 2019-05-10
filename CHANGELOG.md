@@ -1,3 +1,7 @@
+##### Version 1.4.1 (2019-05-10)
+
+	Add information about inside form in basic usage
+
 ##### Version 1.4.0 (2019-05-09)
 
 	Add card verification request.
