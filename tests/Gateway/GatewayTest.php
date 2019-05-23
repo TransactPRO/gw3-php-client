@@ -20,6 +20,7 @@ use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
 use TransactPro\Gateway\Operations\Info\Result;
 use TransactPro\Gateway\Operations\Info\Status;
+use TransactPro\Gateway\Operations\Token\CreateToken;
 use TransactPro\Gateway\Operations\Transactions\B2P;
 use TransactPro\Gateway\Operations\Transactions\Cancel;
 use TransactPro\Gateway\Operations\Transactions\Credit;
@@ -36,6 +37,7 @@ use TransactPro\Gateway\Operations\Transactions\Refund;
 use TransactPro\Gateway\Operations\Transactions\Reversal;
 use TransactPro\Gateway\Operations\Transactions\Sms;
 use TransactPro\Gateway\Operations\Verify\Enrolled3D;
+use TransactPro\Gateway\Operations\Verify\VerifyCard;
 
 class GatewayTest extends TestCase
 {
@@ -96,6 +98,8 @@ class GatewayTest extends TestCase
         $this->assertInstanceOf(Status::class, $gw->createStatus());
 
         $this->assertInstanceOf(Enrolled3D::class, $gw->createVerify3dEnrollment());
+        $this->assertInstanceOf(VerifyCard::class, $gw->createCardVerification());
+        $this->assertInstanceOf(CreateToken::class, $gw->createToken());
 
         $status = $gw->createStatus();
         $status->info()->setGatewayTransactionIDs(['example-key']);

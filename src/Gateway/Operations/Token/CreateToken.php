@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace TransactPro\Gateway\Operations\Transactions;
+namespace TransactPro\Gateway\Operations\Token;
 
 use TransactPro\Gateway\DataSets\Command;
-use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
 use TransactPro\Gateway\DataSets\Order;
@@ -23,17 +22,17 @@ use TransactPro\Gateway\Operations\Operation;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
- * Class MotoSms.
+ * Class Sms.
  *
- * This class describes dataset to perform MOTO SMS request.
- * Refer to official documentation for more information about MOTO SMS request.
+ * This class describes dataset to perform SMS request.
+ * Refer to official documentation for more information about SMS request.
  */
-class MotoSms extends Operation implements OperationInterface
+class CreateToken extends Operation implements OperationInterface
 {
     /**
      * {@inheritdoc}
      */
-    protected $path = '/moto/sms';
+    protected $path = '/token/create';
 
     /**
      * {@inheritdoc}
@@ -46,7 +45,6 @@ class MotoSms extends Operation implements OperationInterface
     protected $mandatoryFields = [
         DataSet::PAYMENT_METHOD_DATA_PAN,
         DataSet::PAYMENT_METHOD_DATA_EXPIRE,
-        DataSet::MONEY_DATA_AMOUNT,
         DataSet::MONEY_DATA_CURRENCY,
     ];
 
@@ -59,11 +57,6 @@ class MotoSms extends Operation implements OperationInterface
      * @var Money
      */
     private $money;
-
-    /**
-     * @var Customer
-     */
-    private $customer;
 
     /**
      * @var Order
@@ -81,28 +74,26 @@ class MotoSms extends Operation implements OperationInterface
     private $command;
 
     /**
-     * MotoSms constructor.
+     * Sms constructor.
      *
      * @param Validator     $validator
      * @param PaymentMethod $paymentMethod
      * @param Money         $money
-     * @param Customer      $customer
      * @param Order         $order
      * @param System        $system
      * @param Command       $command
      */
-    public function __construct(Validator $validator, PaymentMethod $paymentMethod, Money $money, Customer $customer, Order $order, System $system, Command $command)
+    public function __construct(Validator $validator, PaymentMethod $paymentMethod, Money $money, Order $order, System $system, Command $command)
     {
         $this->validator = $validator;
 
         $this->paymentMethod = $paymentMethod;
         $this->money = $money;
-        $this->customer = $customer;
         $this->order = $order;
         $this->system = $system;
         $this->command = $command;
 
-        $this->dataSets = [$this->paymentMethod, $this->money, $this->customer, $this->order, $this->system, $this->command];
+        $this->dataSets = [$this->paymentMethod, $this->money, $this->order, $this->system, $this->command];
     }
 
     /**
@@ -119,14 +110,6 @@ class MotoSms extends Operation implements OperationInterface
     public function money()
     {
         return $this->money;
-    }
-
-    /**
-     * @return Customer
-     */
-    public function customer()
-    {
-        return $this->customer;
     }
 
     /**

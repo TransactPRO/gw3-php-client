@@ -34,6 +34,11 @@ class Validator
         DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'string',
         DataSet::COMMAND_DATA_FORM_ID => 'string',
         DataSet::COMMAND_DATA_TERMINAL_MID => 'string',
+        DataSet::COMMAND_DATA_FORM_ID => 'string',
+        DataSet::COMMAND_DATA_TERMINAL_MID => 'string',
+        DataSet::COMMAND_DATA_CARD_VERIFICATION => 'integer',
+        DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE => 'integer',
+        DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN => 'string',
 
         // general data
         DataSet::GENERAL_DATA_CUSTOMER_DATA_EMAIL => 'string',

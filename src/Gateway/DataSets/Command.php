@@ -23,6 +23,12 @@ class Command extends DataSet implements DataSetInterface
     const CARD_VERIFICATION_MODE_INIT = 1;
     const CARD_VERIFICATION_MODE_VERIFY = 2;
 
+    const DATA_SOURCE_CARDHOLDER = 0;
+    const DATA_SOURCE_SAVE_TO_GATEWAY = 1;
+    const DATA_SOURCE_USE_GATEWAY_SAVED = 2;
+    const DATA_SOURCE_SAVING_BY_MERCHANT = 3;
+    const DATA_SOURCE_USE_MERCHANT_SAVED = 4;
+
     /**
      * @param  string  $gatewayTransactionID
      * @return Command
@@ -63,6 +69,28 @@ class Command extends DataSet implements DataSetInterface
     public function setCardVerificationMode(int $cardVerificationMode): self
     {
         $this->data[self::COMMAND_DATA_CARD_VERIFICATION] = $cardVerificationMode;
+
+        return $this;
+    }
+
+    /**
+     * @param  int $paymentMethodDataSource
+     * @return Command
+     */
+    public function setPaymentMethodDataSource(int $paymentMethodDataSource): self
+    {
+        $this->data[self::COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE] = $paymentMethodDataSource;
+
+        return $this;
+    }
+
+    /**
+     * @param  string $paymentMethodDataToken
+     * @return Command
+     */
+    public function setPaymentMethodDataToken(string $paymentMethodDataToken): self
+    {
+        $this->data[ self::COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN ] = $paymentMethodDataToken;
 
         return $this;
     }

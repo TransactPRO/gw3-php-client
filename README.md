@@ -126,6 +126,8 @@ Available operations:
 - Verification
   - 3-D Secure enrollment
   - Complete card verification
+- Tokenization
+  - Create payment data token
 
 Pattern to work with the library can be described as follows:
 
@@ -178,6 +180,34 @@ $response = $gw->process($request);
 
 // send a payment with flag to accept only verified cards
 $message->command()->setCardVerificationMode(Command::CARD_VERIFICATION_MODE_VERIFY);
+```
+
+### Payment data tokenization
+
+```php
+<?php
+
+use TransactPro\Gateway\DataSets\Command;
+
+// option 1: create a payment with flag to save payment data
+$message->command()->setPaymentMethodDataSource(Command::DATA_SOURCE_SAVE_TO_GATEWAY);
+
+// option 2: send "create token" request with payment data
+$operation = $gw->createToken();
+$operation->paymentMethod()
+    ->setPAN('<card number>')
+    ->setExpire('<card expiry>')
+    ->setCardHolderName('<cardholder name>');
+$operation->money()
+    ->setCurrency('<desired currency>');
+$operationRequest = $operation->build();
+$response = $gw->process($request);
+
+// send a payment in "token usage" mode with flag to load payment data by token
+$message->useToken();
+$message->command()
+    ->setPaymentMethodDataSource(Command::DATA_SOURCE_USE_GATEWAY_SAVED)
+    ->setPaymentMethodDataToken('<initial gateway-transaction-id>');
 ```
 
 ### Customization

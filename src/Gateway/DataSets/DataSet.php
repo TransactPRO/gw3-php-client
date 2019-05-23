@@ -25,6 +25,8 @@ abstract class DataSet
     const COMMAND_DATA_FORM_ID = 'data.command-data.form-id';
     const COMMAND_DATA_TERMINAL_MID = 'data.command-data.terminal-mid';
     const COMMAND_DATA_CARD_VERIFICATION = 'data.command-data.card-verification';
+    const COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE = 'data.command-data.payment-method-data-source';
+    const COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN = 'data.command-data.payment-method-data-token';
 
     // customer data
     const GENERAL_DATA_CUSTOMER_DATA_EMAIL = 'data.general-data.customer-data.email';
