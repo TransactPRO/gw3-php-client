@@ -206,7 +206,7 @@ $response = $gw->process($request);
 // send a payment in "token usage" mode with flag to load payment data by token
 $message->useToken();
 $message->command()
-    ->setPaymentMethodDataSource(Command::DATA_SOURCE_USE_GATEWAY_SAVED)
+    ->setPaymentMethodDataSource(Command::DATA_SOURCE_USE_GATEWAY_SAVED_CARDHOLDER_INITIATED)
     ->setPaymentMethodDataToken('<initial gateway-transaction-id>');
 ```
 
