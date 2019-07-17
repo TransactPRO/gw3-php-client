@@ -73,7 +73,7 @@ abstract class Operation implements OperationInterface
     }
 
     /**
-     * @param  DataSetInterface[] ...$dataSets
+     * @param  DataSetInterface ...$dataSets
      * @return void
      */
     protected function addSets(DataSetInterface ...$dataSets)
@@ -98,6 +98,18 @@ abstract class Operation implements OperationInterface
         ];
 
         $this->mandatoryFields = array_values(array_diff($this->mandatoryFields, $ignoreFields));
+
+        return $this;
+    }
+
+    /**
+     * Prepares request for token usage instead of raw payment data
+     */
+    public function useToken()
+    {
+        $this->insideForm();
+        $this->mandatoryFields[] = DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE;
+        $this->mandatoryFields[] = DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN;
 
         return $this;
     }

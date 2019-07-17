@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace TransactPro\Gateway\Operations\Transactions;
+namespace TransactPro\Gateway\Operations\Token;
 
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Command;
@@ -22,34 +22,38 @@ use TransactPro\Gateway\DataSets\System;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 use TransactPro\Gateway\Validator\Validator;
 
-class MotoSmsTest extends TestCase
+class CreateTokenTest extends TestCase
 {
-    public function testMotoSmsSuccess()
+    public function testCreateTokenSuccess()
     {
         $expected = [
-            DataSet::PAYMENT_METHOD_DATA_PAN => '123',
+            DataSet::PAYMENT_METHOD_DATA_PAN => 'qwe123',
             DataSet::PAYMENT_METHOD_DATA_EXPIRE => '12/21',
-            DataSet::MONEY_DATA_AMOUNT => 100,
+            DataSet::PAYMENT_METHOD_DATA_CARDHOLDER_NAME => 'John Doe',
             DataSet::MONEY_DATA_CURRENCY => 'USD',
         ];
 
-        $motoSms = new MotoSms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
-        $motoSms->money()->setAmount(100)->setCurrency('USD');
-        $motoSms->paymentMethod()->setPAN('123')->setExpire('12/21');
+        $sms = new CreateToken(new Validator(), new PaymentMethod(), new Money(), new Order(), new System(), new Command());
+        $sms->paymentMethod()
+            ->setPAN('qwe123')
+            ->setExpire('12/21')
+            ->setCardHolderName('John Doe');
+        $sms->money()
+            ->setCurrency('USD');
 
-        $raw = $motoSms->build();
+        $raw = $sms->build();
 
         $this->assertEquals("POST", $raw->getMethod());
-        $this->assertEquals("/moto/sms", $raw->getPath());
+        $this->assertEquals("/token/create", $raw->getPath());
         $this->assertEquals($expected, $raw->getData());
     }
 
-    public function testMotoSmsValidatorException()
+    public function testCreateTokenValidatorException()
     {
         $this->expectException(ValidatorException::class);
 
-        $motoSms = new MotoSms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
+        $sms = new CreateToken(new Validator(), new PaymentMethod(), new Money(), new Order(), new System(), new Command());
 
-        $motoSms->build();
+        $sms->build();
     }
 }

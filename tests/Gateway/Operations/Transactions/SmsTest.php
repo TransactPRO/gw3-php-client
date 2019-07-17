@@ -69,4 +69,19 @@ class SmsTest extends TestCase
 
         $this->assertEquals($raw->getPath(), '/sms');
     }
+
+    public function testSmsUseToken()
+    {
+        $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
+        $sms->command()
+            ->setPaymentMethodDataToken('test-tr-id')
+            ->setPaymentMethodDataSource(Command::DATA_SOURCE_USE_GATEWAY_SAVED_CARDHOLDER_INITIATED);
+        $sms->money()
+            ->setAmount(100)
+            ->setCurrency('EUR');
+
+        $raw = $sms->useToken()->build();
+
+        $this->assertEquals($raw->getPath(), '/sms');
+    }
 }

@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Operations\Transactions;
 
 use PHPUnit\Framework\TestCase;
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
@@ -32,7 +33,7 @@ class MotoDmsTest extends TestCase
             DataSet::MONEY_DATA_CURRENCY => 'USD',
         ];
 
-        $motoDms = new MotoDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $motoDms = new MotoDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $motoDms->money()->setAmount(100)->setCurrency('USD');
         $motoDms->paymentMethod()->setPAN('123')->setExpire('12/21');
 
@@ -47,7 +48,7 @@ class MotoDmsTest extends TestCase
     {
         $this->expectException(ValidatorException::class);
 
-        $motoDms = new MotoDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System());
+        $motoDms = new MotoDms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
 
         $motoDms->build();
     }
