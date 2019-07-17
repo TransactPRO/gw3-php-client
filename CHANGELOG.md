@@ -1,3 +1,7 @@
+##### Version 1.5.0 (2019-07-17)
+
+	Add payment data tokenization methods
+
 ##### Version 1.4.1 (2019-05-10)
 
 	Add information about inside form in basic usage
