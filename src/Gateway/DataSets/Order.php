@@ -121,4 +121,16 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param string $customReturnUrl
+     *
+     * @return Order
+     */
+    public function setCustomReturnUrl(string $customReturnUrl): self
+    {
+        $this->data[ self::GENERAL_DATA_ORDER_DATA_CUSTOM_RETURN_URL ] = $customReturnUrl;
+
+        return $this;
+    }
 }
