@@ -1,3 +1,7 @@
+##### Version 1.6.0 (2020-02-25)
+
+	Add possibility to use custom return URL
+
 ##### Version 1.5.0 (2019-07-17)
 
 	Add payment data tokenization methods
