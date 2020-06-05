@@ -18,9 +18,7 @@ class AuthTest extends TestCase
     public function testSuccess()
     {
         $expected = [
-            DataSet::AUTH_DATA_ACCOUNT_GUID => '3383e58e-9cde-4ffa-85cf-81cd25b2423e',
-            DataSet::AUTH_DATA_SECRET_KEY   => 'aaaa',
-            DataSet::AUTH_DATA_SESSION_ID   => 'foo',
+            DataSet::AUTH_DATA_SESSION_ID => 'foo',
         ];
 
         $auth = new Auth();
@@ -30,5 +28,18 @@ class AuthTest extends TestCase
             ->getRaw();
 
         $this->assertEquals($expected, $generated);
+        $this->assertEquals('3383e58e-9cde-4ffa-85cf-81cd25b2423e', $auth->getAccountGUID());
+        $this->assertEquals('aaaa', $auth->getSecretKey());
+    }
+
+    public function testGetObjectId()
+    {
+        $authAccount = new Auth();
+        $authAccount->setAccountGUID('3383e58e-9cde-4ffa-85cf-81cd25b2423e');
+        $this->assertEquals('3383e58e-9cde-4ffa-85cf-81cd25b2423e', $authAccount->getObjectGUID());
+
+        $authMerchant = new Auth();
+        $authMerchant->setMerchantGUID('AAAA-BBBB-CCCC-DDDD');
+        $this->assertEquals('AAAA-BBBB-CCCC-DDDD', $authMerchant->getObjectGUID());
     }
 }

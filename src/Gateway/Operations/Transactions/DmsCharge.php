@@ -15,8 +15,11 @@ use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Money;
 use TransactPro\Gateway\DataSets\Order;
+use TransactPro\Gateway\Exceptions\ResponseException;
 use TransactPro\Gateway\Interfaces\OperationInterface;
+use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Operation;
+use TransactPro\Gateway\Responses\PaymentResponse;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
@@ -101,5 +104,16 @@ class DmsCharge extends Operation implements OperationInterface
     public function order()
     {
         return $this->order;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return PaymentResponse
+     * @throws ResponseException
+     */
+    public function parseResponse(ResponseInterface $response): PaymentResponse
+    {
+        return $response->parseJSON(PaymentResponse::class);
     }
 }

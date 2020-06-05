@@ -11,25 +11,41 @@
 
 namespace TransactPro\Gateway\Interfaces;
 
+use TransactPro\Gateway\Exceptions\RequestException;
+use TransactPro\Gateway\Exceptions\ResponseException;
+
 /**
  * Interface HttpClientInterface
- *
  * All HTTP clients that willing to be used by the library
  * should implement this interface.
  */
 interface HttpClientInterface
 {
     /**
-     * Request is a method that do request.
+     * Compose final URL from base URL and given path.
+     * NB. /report method URL must be without version!
+     * NB. Method should not be used for redirect URLs!
      *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function createUrl(string $path): string;
+
+    /**
+     * Request is a method that do request.
      * Internally, this method should call some Transport that
      * will handle the request.
      *
-     * @param string $method HTTP methods (GET, POST, ...)
-     * @param string $path   path of the resource (/sms)
-     * @param string $body   request body
+     * @param string $username Entity ID for authentication (like account GUID)
+     * @param string $secret   Secret key for digest verification
+     * @param string $method   HTTP methods (GET, POST, ...)
+     * @param string $path     path of the resource (/sms)
+     * @param string $body     request body
      *
      * @return ResponseInterface
+     * @throws RequestException
+     * @throws ResponseException
      */
-    public function request(string $method, string $path, string $body): ResponseInterface;
+    public function request(string $username, string $secret, string $method, string $path, string $body): ResponseInterface;
 }

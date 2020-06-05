@@ -23,9 +23,20 @@ class ResponseTest extends TestCase
 
         $this->assertEquals(200, $resp->getStatusCode());
         $this->assertEquals("some answer", $resp->getBody());
-        $this->assertEquals([
-            "Content-Type" => "application/json",
-        ], $resp->getHeaders());
+        $this->assertEquals(["Content-Type" => "application/json"], $resp->getHeaders());
         $this->assertEquals("application/json", $resp->getHeader("content-type"));
+    }
+
+    public function testIsSuccessful()
+    {
+        $this->assertTrue((new Response(200, "doesn't matter"))->isSuccessful());
+        $this->assertTrue((new Response(201, "doesn't matter"))->isSuccessful());
+        $this->assertTrue((new Response(302, "doesn't matter"))->isSuccessful());
+        $this->assertTrue((new Response(402, "doesn't matter"))->isSuccessful());
+
+        $this->assertFalse((new Response(404, "doesn't matter"))->isSuccessful());
+        $this->assertFalse((new Response(401, "doesn't matter"))->isSuccessful());
+        $this->assertFalse((new Response(403, "doesn't matter"))->isSuccessful());
+        $this->assertFalse((new Response(500, "doesn't matter"))->isSuccessful());
     }
 }

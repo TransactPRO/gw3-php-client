@@ -29,12 +29,14 @@ interface HttpTransportInterface
     public function init();
 
     /**
-     * @param  string $method HTTP method (GET, POST, ...)
-     * @param  string $url    URL (https://api.transactpro.lv/version) without trailing slash (/)
-     * @param  string $body   Body of the request
+     * @param string $method              HTTP method (GET, POST, ...)
+     * @param string $url                 URL (https://api.transactpro.lv/version) without trailing slash (/)
+     * @param string $authorizationHeader 'Authorization' header
+     * @param string $body                Body of the request
+     *
      * @return bool
      */
-    public function execute(string $method, string $url, string $body): bool;
+    public function execute(string $method, string $url, string $authorizationHeader, string $body): bool;
 
     public function close();
 

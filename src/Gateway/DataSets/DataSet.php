@@ -15,6 +15,7 @@ abstract class DataSet
 {
     // auth data
     const AUTH_DATA_ACCOUNT_GUID = 'auth-data.account-guid';
+    const AUTH_DATA_MERCHANT_GUID = 'auth-data.merchant-guid';
     const AUTH_DATA_SECRET_KEY = 'auth-data.secret-key';
     const AUTH_DATA_SESSION_ID = 'auth-data.session-id';
 
@@ -79,6 +80,12 @@ abstract class DataSet
     const DATA_CURRENCY = 'data.currency';
     const DATA_PAN = 'data.pan';
     const DATA_GATEWAY_TRANSACTION_ID = 'data.gateway-transaction-id';
+
+    // filter data
+    const FILTER_DATA_DT_CREATED_FROM = 'filter-data.dt-created-from';
+    const FILTER_DATA_DT_CREATED_TO = 'filter-data.dt-created-to';
+    const FILTER_DATA_DT_FINISHED_FROM = 'filter-data.dt-finished-from';
+    const FILTER_DATA_DT_FINISHED_TO = 'filter-data.dt-finished-to';
 
     /**
      * @var array
