@@ -1,3 +1,11 @@
+##### Version 1.7.0 (2020-07-03)
+
+	Improve authorization to use digest instead of API key.
+	Verify non-failed responses for valid digest.
+	Add possibility to validate callback data.
+	Implement /report method.
+	Implement response parsing.
+
 ##### Version 1.6.0 (2020-02-25)
 
 	Add possibility to use custom return URL
