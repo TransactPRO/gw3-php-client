@@ -13,8 +13,11 @@ namespace TransactPro\Gateway\Operations\Verify;
 
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Verify3dEnrollment;
+use TransactPro\Gateway\Exceptions\ResponseException;
 use TransactPro\Gateway\Interfaces\OperationInterface;
+use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Operation;
+use TransactPro\Gateway\Responses\EnrollmentResponse;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
@@ -66,5 +69,16 @@ class Enrolled3D extends Operation implements OperationInterface
     public function inputData(): Verify3dEnrollment
     {
         return $this->inputData;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return EnrollmentResponse
+     * @throws ResponseException
+     */
+    public function parseResponse(ResponseInterface $response): EnrollmentResponse
+    {
+        return $response->parseJSON(EnrollmentResponse::class);
     }
 }

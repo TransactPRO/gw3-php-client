@@ -21,6 +21,42 @@ use TransactPro\Gateway\Interfaces\DataSetInterface;
 class Auth extends DataSet implements DataSetInterface
 {
     /**
+     * @return string|null
+     */
+    public function getObjectGUID()
+    {
+        return $this->getAccountGUID() ?? $this->getMerchantGUID();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMerchantGUID()
+    {
+        return $this->data[self::AUTH_DATA_MERCHANT_GUID] ?? null;
+    }
+
+    /**
+     * @param string $merchantGUID
+     *
+     * @return Auth
+     */
+    public function setMerchantGUID(string $merchantGUID): self
+    {
+        $this->data[self::AUTH_DATA_MERCHANT_GUID] = $merchantGUID;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAccountGUID()
+    {
+        return $this->data[self::AUTH_DATA_ACCOUNT_GUID] ?? null;
+    }
+
+    /**
      * @param string $accountGUID
      *
      * @return Auth
@@ -30,6 +66,14 @@ class Auth extends DataSet implements DataSetInterface
         $this->data[self::AUTH_DATA_ACCOUNT_GUID] = $accountGUID;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSecretKey()
+    {
+        return $this->data[self::AUTH_DATA_SECRET_KEY] ?? null;
     }
 
     /**
@@ -52,5 +96,18 @@ class Auth extends DataSet implements DataSetInterface
         $this->data[self::AUTH_DATA_SESSION_ID] = $sessionID;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRaw()
+    {
+        $result = [];
+        if (isset($this->data[self::AUTH_DATA_SESSION_ID])) {
+            $result[self::AUTH_DATA_SESSION_ID] = $this->data[self::AUTH_DATA_SESSION_ID];
+        }
+
+        return $result;
     }
 }

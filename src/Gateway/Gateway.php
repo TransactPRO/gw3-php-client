@@ -11,9 +11,11 @@
 
 namespace TransactPro\Gateway;
 
+use stdClass;
 use TransactPro\Gateway\DataSets\Auth;
 use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\Customer;
+use TransactPro\Gateway\DataSets\FilterData;
 use TransactPro\Gateway\DataSets\Info;
 use TransactPro\Gateway\DataSets\Money;
 use TransactPro\Gateway\DataSets\Order;
@@ -28,9 +30,14 @@ use TransactPro\Gateway\Http\Transport\Curl;
 use TransactPro\Gateway\Interfaces\HttpClientInterface;
 use TransactPro\Gateway\Interfaces\OperationInterface;
 use TransactPro\Gateway\Interfaces\ResponseInterface;
+use TransactPro\Gateway\Operations\Helpers\RetrieveForm;
 use TransactPro\Gateway\Operations\Info\History;
+use TransactPro\Gateway\Operations\Info\Limits;
+use TransactPro\Gateway\Operations\Info\Recurrents;
+use TransactPro\Gateway\Operations\Info\Refunds;
 use TransactPro\Gateway\Operations\Info\Result;
 use TransactPro\Gateway\Operations\Info\Status;
+use TransactPro\Gateway\Operations\Reporting\Report;
 use TransactPro\Gateway\Operations\Token\CreateToken;
 use TransactPro\Gateway\Operations\Transactions\B2P;
 use TransactPro\Gateway\Operations\Transactions\Cancel;
@@ -49,6 +56,7 @@ use TransactPro\Gateway\Operations\Transactions\Reversal;
 use TransactPro\Gateway\Operations\Transactions\Sms;
 use TransactPro\Gateway\Operations\Verify\Enrolled3D;
 use TransactPro\Gateway\Operations\Verify\VerifyCard;
+use TransactPro\Gateway\Responses\PaymentResponse;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
@@ -352,6 +360,45 @@ class Gateway
     }
 
     /**
+     * RECURRENTS information request builder.
+     *
+     * RECURRENTS information builder provide all
+     * needed methods to prepare request.
+     *
+     * @return Recurrents
+     */
+    public function createRecurringTransactions()
+    {
+        return new Recurrents(new Validator(), new Info());
+    }
+
+    /**
+     * REFUNDS information request builder.
+     *
+     * REFUNDS information builder provide all
+     * needed methods to prepare request.
+     *
+     * @return Refunds
+     */
+    public function createRefunds()
+    {
+        return new Refunds(new Validator(), new Info());
+    }
+
+    /**
+     * LIMITS information request builder.
+     *
+     * LIMITS information builder provide all
+     * needed methods to prepare request.
+     *
+     * @return Limits
+     */
+    public function createLimits()
+    {
+        return new Limits(new Validator());
+    }
+
+    /**
      * Verify 3D-Secure enrollment request builder.
      *
      * Verify 3D-Secure enrollment builder provide all
@@ -391,24 +438,56 @@ class Gateway
     }
 
     /**
+     * Transactions CSV report loading request.
+     *
+     * Transactions CSV report loading request builder provide all
+     * needed methods to prepare request.
+     *
+     * @return Report
+     */
+    public function createReport(): Report
+    {
+        return new Report(new Validator(), new FilterData());
+    }
+
+    /**
+     * Retrieve an HTML form request.
+     * Retrieve an HTML form loading request builder provide all
+     * needed methods to prepare request.
+     *
+     * @param PaymentResponse $paymentResponse
+     *
+     * @return RetrieveForm
+     * @throws Exceptions\RequestException
+     */
+    public function createRetrieveForm(PaymentResponse $paymentResponse): RetrieveForm
+    {
+        return new RetrieveForm(new Validator(), $paymentResponse);
+    }
+
+    /**
      * Process prepares and apply provided request
      *
-     * @param  Request $request
+     * @param Request $request
      *
      * @return ResponseInterface
      * @throws Exceptions\RequestException
+     * @throws Exceptions\ResponseException
      */
     public function process(Request $request)
     {
         $payload = $request->getPreparedData();
-
-        if (empty($payload)) {
-            $payload = $this->generatePayload(array_merge($this->auth->getRaw(), $request->getData()));
+        if (empty($payload) && strtolower($request->getMethod()) !== 'GET') {
+            $payload = $this->generatePayload($request->getData());
             $request->setPreparedData($payload);
         }
 
-        return $this->httpClient->request($request->getMethod(), $request->getPath(), $payload);
+        $url = $request->getPath();
+        if (!preg_match('/^http.+/', $request->getPath())) {
+            $url = $this->httpClient->createUrl($url);
+        }
 
+        return $this->httpClient->request($this->auth->getObjectGUID(), $this->auth->getSecretKey(), $request->getMethod(), $url, $payload);
     }
 
     /**
@@ -422,7 +501,7 @@ class Gateway
     {
         $req = $operation->build();
 
-        $payload = $this->generatePayload(array_merge($this->auth->getRaw(), $req->getData()));
+        $payload = $this->generatePayload($req->getData());
 
         $req->setPreparedData($payload);
 
@@ -432,14 +511,20 @@ class Gateway
     /**
      * Generate JSON string payload for the request.
      *
-     * @param array $mergedPayload
+     * @param array $data
      * @return string
      */
-    private function generatePayload(array $mergedPayload = [])
+    private function generatePayload(array $data = [])
     {
+        $mergedPayload = array_merge($this->auth->getRaw(), $data);
+
         $finalPayload = [];
         foreach ($mergedPayload as $k => $v) {
             $finalPayload = array_merge_recursive($finalPayload, $this->setByPath($k, $v));
+        }
+
+        if (empty($finalPayload)) {
+            $finalPayload = new stdClass();
         }
 
         return json_encode($finalPayload);

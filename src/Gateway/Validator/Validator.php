@@ -34,8 +34,6 @@ class Validator
         DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'string',
         DataSet::COMMAND_DATA_FORM_ID => 'string',
         DataSet::COMMAND_DATA_TERMINAL_MID => 'string',
-        DataSet::COMMAND_DATA_FORM_ID => 'string',
-        DataSet::COMMAND_DATA_TERMINAL_MID => 'string',
         DataSet::COMMAND_DATA_CARD_VERIFICATION => 'integer',
         DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE => 'integer',
         DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN => 'string',
@@ -91,6 +89,12 @@ class Validator
         DataSet::DATA_CURRENCY => 'string',
         DataSet::DATA_PAN => 'string',
         DataSet::DATA_GATEWAY_TRANSACTION_ID => 'string',
+
+        // filter data
+        DataSet::FILTER_DATA_DT_CREATED_FROM => 'integer',
+        DataSet::FILTER_DATA_DT_CREATED_TO => 'integer',
+        DataSet::FILTER_DATA_DT_FINISHED_FROM => 'integer',
+        DataSet::FILTER_DATA_DT_FINISHED_TO => 'integer',
     ];
 
     /**

@@ -11,7 +11,10 @@
 
 namespace TransactPro\Gateway\Http;
 
+use TransactPro\Gateway\Http\Crypto\ResponseDigest;
 use TransactPro\Gateway\Interfaces\ResponseInterface;
+use TransactPro\Gateway\Responses\CsvResponse;
+use TransactPro\Gateway\Responses\GatewayResponse;
 
 /**
  * Class Response.
@@ -34,6 +37,13 @@ class Response implements ResponseInterface
      * @var string
      */
     private $body;
+
+    /**
+     * Parsed response digest representation object
+     *
+     * @var null|ResponseDigest
+     */
+    private $digest;
 
     /**
      * List of of original Headers as
@@ -69,6 +79,14 @@ class Response implements ResponseInterface
     public function getStatusCode(): int
     {
         return $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSuccessful(): bool
+    {
+        return ($this->status >= 200 && $this->status < 400) || $this->status == 402;
     }
 
     /**
@@ -138,5 +156,37 @@ class Response implements ResponseInterface
     public function getBody(): string
     {
         return $this->body;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDigest()
+    {
+        return $this->digest;
+    }
+
+    /**
+     * @param ResponseDigest|null $digest
+     */
+    public function setDigest(ResponseDigest $digest = null)
+    {
+        $this->digest = $digest;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseJSON(string $targetClass)
+    {
+        return GatewayResponse::createFromJSON($this->body, $targetClass);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseCsv(): CsvResponse
+    {
+        return new CsvResponse($this->body ?? '');
     }
 }

@@ -12,6 +12,8 @@
 namespace TransactPro\Gateway\Http\Client;
 
 use TransactPro\Gateway\Exceptions\RequestException;
+use TransactPro\Gateway\Http\Crypto\RequestDigest;
+use TransactPro\Gateway\Http\Crypto\ResponseDigest;
 use TransactPro\Gateway\Http\Response;
 use TransactPro\Gateway\Interfaces\HttpClientInterface;
 use TransactPro\Gateway\Interfaces\HttpTransportInterface;
@@ -20,11 +22,18 @@ use TransactPro\Gateway\Interfaces\ResponseInterface;
 class Client implements HttpClientInterface
 {
     /**
-     * Full URL of the resource.
+     * Base URL gateway API URL.
      *
      * @var string
      */
-    private $url;
+    private $baseUrl;
+
+    /**
+     * Gateway API version.
+     *
+     * @var string
+     */
+    private $version;
 
     /**
      * Transport which will actually do the request.
@@ -41,29 +50,64 @@ class Client implements HttpClientInterface
      */
     public function __construct($url, HttpTransportInterface $httpTransport)
     {
-        $this->url = $url;
+        $parsedUrl = parse_url($url);
+
+        $this->baseUrl = $url;
+        $this->version = $parsedUrl['path'] ?? $url;
+        if ($this->baseUrl === $this->version) {
+            $this->version = '';
+        } else {
+            $this->baseUrl = str_replace($this->version, '', $this->baseUrl);
+        }
+
         $this->transport = $httpTransport;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    public function createUrl(string $path): string
+    {
+        if ($path === '/report') {
+            return "{$this->baseUrl}{$path}";
+        }
+
+        return "{$this->baseUrl}{$this->version}{$path}";
     }
 
     /**
      * {@inheritdoc}
      */
-    public function request(string $method, string $path, string $body): ResponseInterface
+    public function request(string $username, string $secret, string $method, string $fullUrl, string $body): ResponseInterface
     {
         $this->transport->init();
 
-        $ok = $this->transport->execute($method, "$this->url$path", $body);
+        $digest = new RequestDigest($username, $secret, $fullUrl);
+        $digest->setBody($body);
+        $authorizationHeader = $digest->createHeader();
+
+        $ok = $this->transport->execute($method, $fullUrl, $authorizationHeader, $body);
         if (!$ok) {
             throw new RequestException($this->transport->error());
         }
 
         $resp = new Response($this->transport->getStatus(), $this->transport->getBody());
-
         foreach ($this->transport->getHeaders() as $k => $v) {
             $resp->setHeader($k, $v);
         }
 
         $this->transport->close();
+        if ($resp->isSuccessful()) {
+            $responseDigest = new ResponseDigest($resp->getHeader('authorization'));
+            $resp->setDigest($responseDigest);
+
+            $responseDigest->setOriginalUri($digest->getUri());
+            $responseDigest->setOriginalCnonce($digest->getCnonce());
+            $responseDigest->setBody($resp->getBody());
+            $responseDigest->verify($username, $secret);
+        }
 
         return $resp;
     }

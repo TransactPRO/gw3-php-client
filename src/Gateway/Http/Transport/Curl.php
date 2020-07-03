@@ -118,16 +118,23 @@ class Curl implements HttpTransportInterface
     /**
      * Execute perform request.
      *
-     * @param  string $method HTTP method
-     * @param  string $url    Full URL of requested resource
-     * @param  string $body   Body of the request
+     * @param string $method              HTTP method
+     * @param string $url                 Full URL of requested resource
+     * @param string $authorizationHeader 'Authorization' header
+     * @param string $body                Body of the request
+     *
      * @return bool
      */
-    public function execute(string $method, string $url, string $body): bool
+    public function execute(string $method, string $url, string $authorizationHeader, string $body): bool
     {
+        $headers = [$authorizationHeader];
+        if ($method != 'GET') {
+            $headers[] = 'Content-Type: application/json';
+        }
+
         $this->setOption(CURLOPT_CUSTOMREQUEST, $method)
             ->setOption(CURLOPT_POSTFIELDS, $body)
-            ->setOption(CURLOPT_HTTPHEADER, ['Content-Type:application/json', 'Expect:'])
+            ->setOption(CURLOPT_HTTPHEADER, $headers)
             ->setOption(CURLOPT_URL, $url)
             ->applyOptions();
 

@@ -1,0 +1,81 @@
+<?php declare(strict_types = 1);
+
+/*
+ * This file is part of the transact-pro/gw3-client package.
+ *
+ * (c) Transact Pro
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace TransactPro\Gateway\Responses\Constants;
+
+class ErrorCode
+{
+    const EEC_GENERAL_ERROR = 1000;
+
+    const EEC_DISABLED_ACCOUNT = 1001;
+    const EEC_DISABLED_TERMINAL = 1002;
+    const EEC_DISABLED_LEGAL_PERSON = 1003;
+
+    const EEC_TIMEOUT_TRN = 1004;
+    const EEC_TIMEOUT_REDIRECT = 1005;
+    const EEC_TIMEOUT_3D = 1006;
+    const EEC_TIMEOUT_ACQ = 1007;
+    const EEC_TIMEOUT_INTERNAL = 1008;
+
+    const EEC_HSM_ENCODE = 1009;
+    const EEC_HSM_DECODE = 1010;
+
+    const EEC_MERCHANT_COUNTERS_EXCEEDED = 1011;
+    const EEC_ACCOUNT_COUNTERS_EXCEEDED = 1012;
+    const EEC_TERMINAL_GROUP_COUNTERS_EXCEEDED = 1013;
+    const EEC_TERMINAL_COUNTERS_EXCEEDED = 1014;
+    const EEC_HSM_TOKEN = 1015;
+
+    const EEC_INPUT_VALIDATION_FAILED = 1100;
+    const EEC_FAILED_BUSINESS_RULES = 1101;
+
+    const EEC_CC_BAD_NUMBER = 1102;
+    const EEC_CC_BAD_EXPIRE = 1103;
+    const EEC_CC_NO_CVV = 1104;
+    const EEC_CC_BAD_CVV = 1105;
+    const EEC_CC_EXPIRED = 1106;
+    const EEC_CC_UNKNOWN_CARD_TYPE = 1107;
+    const EEC_3D_ERROR_MDSTATUS = 1108;
+    const EEC_3D_ERROR_AUTH = 1109;
+    const EEC_CC_LIABILITY_SHIFT = 1110;
+    const EEC_CC_NOT_VALIDATED = 1111;
+    const EEC_3D_DATA_CORRUPTED = 1112;
+
+    const EEC_WRONG_GW_UNIQ_ID = 1151;
+    const EEC_UNACCEPTABLE_GW_UNIQ_ID = 1152;
+    const EEC_GW_UNIQ_ID_CONFLICT = 1153;
+    const EEC_TRANSACTION_TYPE_INVALID = 1154;
+    const EEC_TRANSACTION_STATE_INVALID = 1155;
+    const EEC_TRANSACTION_ALREADY_FINISHED = 1156;
+    const EEC_NO_PARENT_TRANSACTION_PROVIDED = 1157;
+    const EEC_DYNAMIC_DESCRIPTOR_ERROR = 1158;
+    const EEC_UCOF_ERROR = 1159;
+
+    const EEC_TERMINAL_NOT_FOUND = 1200;
+    const EEC_ALL_TERMINAL_COUNTERS_EXCEEDED = 1201;
+    const EEC_TERMINAL_GROUP_NOT_FOUND = 1202;
+    const EEC_ALL_TERMINAL_GROUP_COUNTERS_EXCEEDED = 1203;
+
+    const EEC_TERMINAL_NOT_SUPPORTING_MOTO = 1204;
+    const EEC_TERMINAL_NOT_SUPPORTING_RECURRENTS = 1205;
+
+    const EEC_DECLINED_BY_ACQUIRER = 1301;
+    const EEC_ACQUIRER_ERROR = 1302;
+
+    const EEC_INVALID_FORM_ID = 1400;
+    const EEC_FORM_UNAVAILABLE = 1401;
+
+    const EEC_CARD_VERIFICATION_NO_CARD_DATA = 1500;
+    const EEC_CARD_VERIFICATION_ALREADY_VERIFIED = 1501;
+
+    const EEC_RBS_INVALID_ORDER_NUMBER = 2000;
+    const EEC_RBS_INVALID_DESCRIPTION = 2001;
+}

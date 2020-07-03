@@ -12,8 +12,11 @@
 namespace TransactPro\Gateway\Operations\Info;
 
 use TransactPro\Gateway\DataSets\Info;
+use TransactPro\Gateway\Exceptions\ResponseException;
 use TransactPro\Gateway\Interfaces\OperationInterface;
+use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Operation;
+use TransactPro\Gateway\Responses\ResultResponse;
 use TransactPro\Gateway\Validator\Validator;
 
 /**
@@ -59,5 +62,16 @@ class Result extends Operation implements OperationInterface
     public function info()
     {
         return $this->info;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return ResultResponse
+     * @throws ResponseException
+     */
+    public function parseResponse(ResponseInterface $response): ResultResponse
+    {
+        return $response->parseJSON(ResultResponse::class);
     }
 }

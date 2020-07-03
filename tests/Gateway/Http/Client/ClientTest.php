@@ -22,17 +22,17 @@ class ClientTest extends TestCase
         $stubTransport = $this->createMock(HttpTransportInterface::class);
 
         $stubTransport->method('execute')->willReturn(true);
-        $stubTransport->method('getStatus')->willReturn(200);
+        $stubTransport->method('getStatus')->willReturn(404);
         $stubTransport->method('getHeaders')->willReturn(['X-Custom' => 'foo']);
         $stubTransport->method('getBody')->willReturn('test body');
 
         $client = new Client("/foo", $stubTransport);
 
-        $resp = $client->request("/", "", "");
+        $resp = $client->request('testuser', 'testsecret', "/", "", "");
 
         $this->assertEquals("test body", $resp->getBody());
         $this->assertEquals('foo', $resp->getHeader('x-custom'));
-        $this->assertEquals(200, $resp->getStatusCode());
+        $this->assertEquals(404, $resp->getStatusCode());
     }
 
     public function testClientRequestException()
@@ -47,6 +47,6 @@ class ClientTest extends TestCase
 
         $client = new Client("/foo", $stubTransport);
 
-        $client->request("/", "", "");
+        $client->request('testuser', 'testsecret',"/", "", "");
     }
 }

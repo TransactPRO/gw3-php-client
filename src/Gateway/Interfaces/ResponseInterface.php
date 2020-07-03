@@ -11,6 +11,10 @@
 
 namespace TransactPro\Gateway\Interfaces;
 
+use TransactPro\Gateway\Exceptions\ResponseException;
+use TransactPro\Gateway\Http\Crypto\ResponseDigest;
+use TransactPro\Gateway\Responses\CsvResponse;
+
 /**
  * Interface ResponseInterface.
  */
@@ -22,6 +26,13 @@ interface ResponseInterface
      * @return int
      */
     public function getStatusCode(): int;
+
+    /**
+     * Will return TRUE if response status code is a successful one
+     *
+     * @return bool
+     */
+    public function isSuccessful(): bool;
 
     /**
      * Set HTTP Header.
@@ -58,4 +69,29 @@ interface ResponseInterface
      * @return string
      */
     public function getBody(): string;
+
+    /**
+     * Get parsed response digest representation object
+     *
+     * @return ResponseDigest|null
+     */
+    public function getDigest();
+
+    /**
+     * Parse response body as a JSON response
+     *
+     * @param string $targetClass
+     *
+     * @return mixed
+     * @throws ResponseException
+     */
+    public function parseJSON(string $targetClass);
+
+    /**
+     * Parse response body as a response in CSV format with mandatory headers line
+     *
+     * @return CsvResponse
+     * @throws ResponseException
+     */
+    public function parseCsv(): CsvResponse;
 }

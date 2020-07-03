@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Auth;
 use TransactPro\Gateway\Exceptions\GatewayException;
 use TransactPro\Gateway\Exceptions\ValidatorException;
+use TransactPro\Gateway\Http\Crypto\ResponseDigest;
 use TransactPro\Gateway\Interfaces\HttpClientInterface;
 use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
@@ -38,16 +39,24 @@ use TransactPro\Gateway\Operations\Transactions\Reversal;
 use TransactPro\Gateway\Operations\Transactions\Sms;
 use TransactPro\Gateway\Operations\Verify\Enrolled3D;
 use TransactPro\Gateway\Operations\Verify\VerifyCard;
+use TransactPro\Gateway\Responses\CsvResponse;
 
 class GatewayTest extends TestCase
 {
     public function testGateway()
     {
         $gw = new Gateway();
+        $csvResponseMock = $this->createMock(CsvResponse::class);;
 
         /** @var HttpClientInterface|\PHPUnit_Framework_MockObject_MockObject $httpClientStub */
         $httpClientStub = $this->createMock(HttpClientInterface::class);
-        $httpClientStub->method('request')->willReturn(new class implements ResponseInterface {
+        $httpClientStub->method('request')->willReturn(new class($csvResponseMock) implements ResponseInterface {
+            private $csvResponseMock;
+
+            public function __construct($csvResponseMock) {
+                $this->csvResponseMock = $csvResponseMock;
+            }
+
             function getStatusCode(): int
             {
                 return 200;
@@ -71,6 +80,26 @@ class GatewayTest extends TestCase
             function getBody(): string
             {
                 return 'holy moly';
+            }
+
+            public function isSuccessful(): bool
+            {
+                return true;
+            }
+
+            public function getDigest()
+            {
+                return null;
+            }
+
+            public function parseJSON(string $targetClass)
+            {
+                return null;
+            }
+
+            public function parseCsv(): CsvResponse
+            {
+                return $this->csvResponseMock;
             }
         });
 
@@ -100,6 +129,10 @@ class GatewayTest extends TestCase
         $this->assertInstanceOf(Enrolled3D::class, $gw->createVerify3dEnrollment());
         $this->assertInstanceOf(VerifyCard::class, $gw->createCardVerification());
         $this->assertInstanceOf(CreateToken::class, $gw->createToken());
+
+        $gw->auth()
+            ->setAccountGUID('dummy-guid')
+            ->setSecretKey('dummy-key');
 
         $status = $gw->createStatus();
         $status->info()->setGatewayTransactionIDs(['example-key']);
