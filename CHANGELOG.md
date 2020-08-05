@@ -1,3 +1,7 @@
+##### Version 1.7.1 (2020-08-05)
+
+	Add parameters describing cardholder device
+
 ##### Version 1.7.0 (2020-07-03)
 
 	Improve authorization to use digest instead of API key.
