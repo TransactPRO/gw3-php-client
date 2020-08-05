@@ -74,6 +74,15 @@ abstract class DataSet
     // system
     const SYSTEM_USER_IP = 'data.system.user-ip';
     const SYSTEM_X_FORWARDED_FOR = 'data.system.x-forwarded-for';
+    const SYSTEM_BROWSER_ACCEPT_HEADER = 'data.system.browser-accept-header';
+    const SYSTEM_BROWSER_JAVA_ENABLED = 'data.system.browser-java-enabled';
+    const SYSTEM_BROWSER_JAVASCRIPT_ENABLED = 'data.system.browser-javascript-enabled';
+    const SYSTEM_BROWSER_LANGUAGE = 'data.system.browser-language';
+    const SYSTEM_BROWSER_COLOR_DEPTH = 'data.system.browser-color-depth';
+    const SYSTEM_BROWSER_SCREEN_HEIGHT = 'data.system.browser-screen-height';
+    const SYSTEM_BROWSER_SCREEN_WIDTH = 'data.system.browser-screen-width';
+    const SYSTEM_BROWSER_TZ = 'data.system.browser-tz';
+    const SYSTEM_BROWSER_USER_AGENT = 'data.system.browser-user-agent';
 
     // data
     const DATA_TERMINAL_MID = 'data.terminal-mid';

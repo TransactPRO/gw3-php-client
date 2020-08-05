@@ -83,6 +83,15 @@ class Validator
         // system
         DataSet::SYSTEM_USER_IP => 'string',
         DataSet::SYSTEM_X_FORWARDED_FOR => 'string',
+        DataSet::SYSTEM_BROWSER_ACCEPT_HEADER => 'string',
+        DataSet::SYSTEM_BROWSER_JAVA_ENABLED => 'boolean',
+        DataSet::SYSTEM_BROWSER_JAVASCRIPT_ENABLED => 'boolean',
+        DataSet::SYSTEM_BROWSER_LANGUAGE => 'string',
+        DataSet::SYSTEM_BROWSER_COLOR_DEPTH => 'string',
+        DataSet::SYSTEM_BROWSER_SCREEN_HEIGHT => 'string',
+        DataSet::SYSTEM_BROWSER_SCREEN_WIDTH => 'string',
+        DataSet::SYSTEM_BROWSER_TZ => 'string',
+        DataSet::SYSTEM_BROWSER_USER_AGENT => 'string',
 
         // top level data
         DataSet::DATA_TERMINAL_MID => 'string',
