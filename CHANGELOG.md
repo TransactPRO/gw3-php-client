@@ -1,3 +1,11 @@
+##### Version 1.7.2 (2020-09-02)
+
+	Add merchant-transaction-id to payment response parsing
+	Affected:
+	 - payment response
+	 - result response
+	 - callback parsing
+
 ##### Version 1.7.1 (2020-08-05)
 
 	Add parameters describing cardholder device
