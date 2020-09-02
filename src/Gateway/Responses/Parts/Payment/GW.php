@@ -14,6 +14,7 @@ namespace TransactPro\Gateway\Responses\Parts\Payment;
 class GW
 {
     public $gatewayTransactionId;
+    public $merchantTransactionId;
     public $originalGatewayTransactionId;
     public $parentGatewayTransactionId;
     public $redirectUrl;
@@ -23,6 +24,7 @@ class GW
     public function __construct(array $rawDecoded = null)
     {
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
+        $this->merchantTransactionId = strval($rawDecoded['merchant-transaction-id'] ?? null);
         $this->originalGatewayTransactionId = strval($rawDecoded['original-gateway-transaction-id'] ?? null);
         $this->parentGatewayTransactionId = strval($rawDecoded['parent-gateway-transaction-id'] ?? null);
         $this->redirectUrl = strval($rawDecoded['redirect-url'] ?? null);

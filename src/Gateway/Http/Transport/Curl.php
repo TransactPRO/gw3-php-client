@@ -136,6 +136,8 @@ class Curl implements HttpTransportInterface
             ->setOption(CURLOPT_POSTFIELDS, $body)
             ->setOption(CURLOPT_HTTPHEADER, $headers)
             ->setOption(CURLOPT_URL, $url)
+            ->setOption(CURLOPT_RETURNTRANSFER, 1)
+            ->setOption(CURLOPT_HEADER, 1)
             ->applyOptions();
 
         $result = curl_exec($this->ch);
@@ -143,10 +145,11 @@ class Curl implements HttpTransportInterface
             return false;
         }
 
-        list($header, $body) = explode("\r\n\r\n", $result, 2);
-        $this->body = $body;
+        $headerSize = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);
+        $header = substr($result, 0, $headerSize);
 
         $this->status = (int) curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+        $this->body = substr($result, $headerSize);
         $this->headers = $this->headersToArray($header);
 
         return true;
@@ -174,7 +177,7 @@ class Curl implements HttpTransportInterface
         $headers = [];
 
         foreach (explode("\r\n", $header) as $i => $line) {
-            if ($i === 0) {
+            if (strlen($line) === 0 || stripos($line, 'HTTP') === 0) {
                 continue;
             }
 

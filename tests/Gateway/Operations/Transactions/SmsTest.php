@@ -92,8 +92,8 @@ class SmsTest extends TestCase
     {
         $body = "{\"acquirer-details\":{\"dynamic-descriptor\":\"test\",\"eci-sli\":\"648\",\"result-code\":\"000\",\"status-description\":\"Approved\"," .
             "\"status-text\":\"Approved\",\"terminal-mid\":\"5800978\",\"transaction-id\":\"1899493845214315\"},\"error\":{}," .
-            "\"gw\":{\"gateway-transaction-id\":\"8a9bed66-8412-494f-9866-2c26b5ceee62\",\"status-code\":7,\"status-text\":\"SUCCESS\"," .
-            "\"original-gateway-transaction-id\":\"orig-aaa\",\"parent-gateway-transaction-id\":\"parent-aaa\"}," .
+            "\"gw\":{\"gateway-transaction-id\":\"8a9bed66-8412-494f-9866-2c26b5ceee62\",\"merchant-transaction-id\":\"87d53472ba27fde33ec03e2f5ca6137a\",".
+            "\"status-code\":7,\"status-text\":\"SUCCESS\",\"original-gateway-transaction-id\":\"orig-aaa\",\"parent-gateway-transaction-id\":\"parent-aaa\"}," .
             "\"warnings\":[\"Soon counters will be exceeded for the merchant\",\"Soon counters will be exceeded for the account\"," .
             "\"Soon counters will be exceeded for the terminal group\",\"Soon counters will be exceeded for the terminal\"]}\n";
 
@@ -111,6 +111,7 @@ class SmsTest extends TestCase
 
         $this->assertNotNull($parsedResponse->gw);
         $this->assertEquals("8a9bed66-8412-494f-9866-2c26b5ceee62", $parsedResponse->gw->gatewayTransactionId);
+        $this->assertEquals("87d53472ba27fde33ec03e2f5ca6137a", $parsedResponse->gw->merchantTransactionId);
         $this->assertEquals("orig-aaa", $parsedResponse->gw->originalGatewayTransactionId);
         $this->assertEquals("parent-aaa", $parsedResponse->gw->parentGatewayTransactionId);
         $this->assertEquals(Status::SUCCESS, $parsedResponse->gw->statusCode);
