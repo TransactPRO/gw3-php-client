@@ -24,7 +24,9 @@ class InitialRecurringTransaction
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
         $this->error = !empty($rawDecoded['error']) ? new Error($rawDecoded['error']) : null;
         if (!empty($rawDecoded['recurrents']) && is_array($rawDecoded['recurrents'])) {
-            $this->subsequent = array_map(function($v) { return new TransactionInfo($v ?? null); }, $rawDecoded['recurrents']);
+            $this->subsequent = array_map(function ($v) {
+                return new TransactionInfo($v ?? null);
+            }, $rawDecoded['recurrents']);
         }
     }
 }

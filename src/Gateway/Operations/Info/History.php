@@ -67,8 +67,8 @@ class History extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return HistoryResponse
      * @throws ResponseException
+     * @return HistoryResponse
      */
     public function parseResponse(ResponseInterface $response): HistoryResponse
     {

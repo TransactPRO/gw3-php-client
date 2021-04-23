@@ -45,7 +45,7 @@ class Report extends Operation implements OperationInterface
     /**
      * Report constructor.
      *
-     * @param Validator $validator
+     * @param Validator  $validator
      * @param FilterData $filterData
      */
     public function __construct(Validator $validator, FilterData $filterData)
@@ -68,8 +68,8 @@ class Report extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return CsvResponse
      * @throws ResponseException
+     * @return CsvResponse
      */
     public function parseResponse(ResponseInterface $response): CsvResponse
     {

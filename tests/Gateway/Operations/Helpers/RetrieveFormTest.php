@@ -47,8 +47,8 @@ class RetrieveFormTest extends TestCase
      * @param $object
      * @param $propertyName
      *
-     * @return mixed
      * @throws ReflectionException
+     * @return mixed
      */
     protected function getPrivatePropertyValue($object, $propertyName)
     {

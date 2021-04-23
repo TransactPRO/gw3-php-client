@@ -55,6 +55,7 @@ class RequestDigest extends Digest
         }
 
         $this->response = hash_hmac($this->getHmacAlgorithm($this->algorithm), $data, $this->secret);
+
         return sprintf(
             'Authorization: Digest username=%s, uri="%s", algorithm=%s, cnonce="%s", qop=%s, response="%s"',
             $this->username,

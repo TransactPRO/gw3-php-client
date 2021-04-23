@@ -43,9 +43,9 @@ interface HttpClientInterface
      * @param string $path     path of the resource (/sms)
      * @param string $body     request body
      *
-     * @return ResponseInterface
      * @throws RequestException
      * @throws ResponseException
+     * @return ResponseInterface
      */
     public function request(string $username, string $secret, string $method, string $path, string $body): ResponseInterface;
 }

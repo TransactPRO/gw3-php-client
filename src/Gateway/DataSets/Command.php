@@ -65,7 +65,7 @@ class Command extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  int $cardVerificationMode
+     * @param  int     $cardVerificationMode
      * @return Command
      */
     public function setCardVerificationMode(int $cardVerificationMode): self
@@ -76,7 +76,7 @@ class Command extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  int $paymentMethodDataSource
+     * @param  int     $paymentMethodDataSource
      * @return Command
      */
     public function setPaymentMethodDataSource(int $paymentMethodDataSource): self
@@ -87,7 +87,7 @@ class Command extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $paymentMethodDataToken
+     * @param  string  $paymentMethodDataToken
      * @return Command
      */
     public function setPaymentMethodDataToken(string $paymentMethodDataToken): self

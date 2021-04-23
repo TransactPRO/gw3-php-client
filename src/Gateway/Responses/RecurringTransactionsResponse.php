@@ -21,7 +21,9 @@ class RecurringTransactionsResponse extends GenericResponse
     {
         parent::__construct($rawDecoded);
         if (!empty($rawDecoded['transactions']) && is_array($rawDecoded['transactions'])) {
-            $this->transactions = array_map(function($v) { return new InitialRecurringTransaction($v ?? null); }, $rawDecoded['transactions']);
+            $this->transactions = array_map(function ($v) {
+                return new InitialRecurringTransaction($v ?? null);
+            }, $rawDecoded['transactions']);
         }
     }
 }

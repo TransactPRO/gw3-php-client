@@ -40,8 +40,9 @@ class HistoryTest extends TestCase
         $this->assertEquals("/history", $req->getPath());
         $this->assertEquals($expected, $req->getData());
     }
-    
-    public function testParseHistoryResponse() {
+
+    public function testParseHistoryResponse()
+    {
         $expectedDate1 = DateTime::createFromFormat('Y-m-d H:i:s', "2020-06-09 09:56:53", new DateTimeZone('UTC'));
         $expectedDate2 = DateTime::createFromFormat('Y-m-d H:i:s', "2020-06-09 09:57:53", new DateTimeZone('UTC'));
 

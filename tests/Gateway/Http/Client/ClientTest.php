@@ -47,6 +47,6 @@ class ClientTest extends TestCase
 
         $client = new Client("/foo", $stubTransport);
 
-        $client->request('testuser', 'testsecret',"/", "", "");
+        $client->request('testuser', 'testsecret', "/", "", "");
     }
 }

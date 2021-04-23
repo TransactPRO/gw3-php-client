@@ -67,8 +67,8 @@ class Status extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return StatusResponse
      * @throws ResponseException
+     * @return StatusResponse
      */
     public function parseResponse(ResponseInterface $response): StatusResponse
     {

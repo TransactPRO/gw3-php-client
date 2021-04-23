@@ -67,8 +67,8 @@ class Recurrents extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return RecurringTransactionsResponse
      * @throws ResponseException
+     * @return RecurringTransactionsResponse
      */
     public function parseResponse(ResponseInterface $response): RecurringTransactionsResponse
     {

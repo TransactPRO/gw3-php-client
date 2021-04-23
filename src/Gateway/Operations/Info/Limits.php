@@ -50,8 +50,8 @@ class Limits extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return LimitsResponse
      * @throws ResponseException
+     * @return LimitsResponse
      */
     public function parseResponse(ResponseInterface $response): LimitsResponse
     {

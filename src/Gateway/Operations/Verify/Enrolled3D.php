@@ -74,8 +74,8 @@ class Enrolled3D extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return EnrollmentResponse
      * @throws ResponseException
+     * @return EnrollmentResponse
      */
     public function parseResponse(ResponseInterface $response): EnrollmentResponse
     {

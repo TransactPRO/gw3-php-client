@@ -142,8 +142,8 @@ class CreateToken extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return PaymentResponse
      * @throws ResponseException
+     * @return PaymentResponse
      */
     public function parseResponse(ResponseInterface $response): PaymentResponse
     {

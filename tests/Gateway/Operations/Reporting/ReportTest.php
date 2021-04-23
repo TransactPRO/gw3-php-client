@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace TransactPro\Gateway\Operations\Transactions;
+namespace TransactPro\Gateway\Operations\Reporting;
 
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\FilterData;
 use TransactPro\Gateway\Http\Response;
-use TransactPro\Gateway\Operations\Reporting\Report;
 use TransactPro\Gateway\Validator\Validator;
 
 class ReportTest extends TestCase

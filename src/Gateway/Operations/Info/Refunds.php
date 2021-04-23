@@ -68,8 +68,8 @@ class Refunds extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return RefundsResponse
      * @throws ResponseException
+     * @return RefundsResponse
      */
     public function parseResponse(ResponseInterface $response): RefundsResponse
     {

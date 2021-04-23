@@ -48,7 +48,7 @@ class CsvResponse implements Iterator
      */
     private function openStream()
     {
-        $this->stream = fopen('data://text/plain,' . $this->data,'r');
+        $this->stream = fopen('data://text/plain,' . $this->data, 'r');
         if ($this->stream === false) {
             $this->stream = null;
             throw new ResponseException('Cannot parse CSV data');
@@ -77,6 +77,7 @@ class CsvResponse implements Iterator
             $this->status = false;
             fclose($this->stream);
             $this->stream = null;
+
             return;
         }
 

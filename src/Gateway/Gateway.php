@@ -457,8 +457,8 @@ class Gateway
      *
      * @param PaymentResponse $paymentResponse
      *
-     * @return RetrieveForm
      * @throws Exceptions\RequestException
+     * @return RetrieveForm
      */
     public function createRetrieveForm(PaymentResponse $paymentResponse): RetrieveForm
     {
@@ -470,9 +470,9 @@ class Gateway
      *
      * @param Request $request
      *
-     * @return ResponseInterface
      * @throws Exceptions\RequestException
      * @throws Exceptions\ResponseException
+     * @return ResponseInterface
      */
     public function process(Request $request)
     {
@@ -493,7 +493,7 @@ class Gateway
     /**
      * Generate request generates Request object filled with data for processing
      *
-     * @param OperationInterface $operation
+     * @param  OperationInterface $operation
      * @throws ValidatorException
      * @return Request
      */
@@ -511,7 +511,7 @@ class Gateway
     /**
      * Generate JSON string payload for the request.
      *
-     * @param array $data
+     * @param  array  $data
      * @return string
      */
     private function generatePayload(array $data = [])

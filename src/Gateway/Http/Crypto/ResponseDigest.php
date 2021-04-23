@@ -41,13 +41,13 @@ class ResponseDigest extends Digest
         }
 
         $headerValues = [
-            'username'  => null,
-            'uri'       => null,
+            'username' => null,
+            'uri' => null,
             'algorithm' => null,
-            'cnonce'    => null,
-            'snonce'    => null,
-            'qop'       => null,
-            'response'  => null,
+            'cnonce' => null,
+            'snonce' => null,
+            'qop' => null,
+            'response' => null,
         ];
         $parsed = explode(',', $parts[1]);
         foreach ($parsed as $keyValue) {
@@ -56,7 +56,7 @@ class ResponseDigest extends Digest
             if ($delimiterPos !== false) {
                 $key = substr($keyValue, 0, $delimiterPos);
                 if (array_key_exists($key, $headerValues)) {
-                    $value = substr($keyValue, $delimiterPos+1);
+                    $value = substr($keyValue, $delimiterPos + 1);
                     $headerValues[ $key ] = trim(trim($value, '"'));
                 }
             }
@@ -64,7 +64,7 @@ class ResponseDigest extends Digest
 
         $restrictions = [
             'algorithm' => array_keys(self::ALGORITHMS_MAP),
-            'qop'       => [self::QOP_AUTH, self::QOP_AUTH_INT],
+            'qop' => [self::QOP_AUTH, self::QOP_AUTH_INT],
         ];
         foreach ($headerValues as $key => $value) {
             if (!isset($value) || !is_string($value)) {

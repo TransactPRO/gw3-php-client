@@ -24,7 +24,9 @@ class RefundedTransaction
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
         $this->error = !empty($rawDecoded['error']) ? new Error($rawDecoded['error']) : null;
         if (!empty($rawDecoded['refunds']) && is_array($rawDecoded['refunds'])) {
-            $this->refunds = array_map(function($v) { return new TransactionInfo($v ?? null); }, $rawDecoded['refunds']);
+            $this->refunds = array_map(function ($v) {
+                return new TransactionInfo($v ?? null);
+            }, $rawDecoded['refunds']);
         }
     }
 }

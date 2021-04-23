@@ -11,11 +11,11 @@
 
 namespace TransactPro\Gateway;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Auth;
 use TransactPro\Gateway\Exceptions\GatewayException;
 use TransactPro\Gateway\Exceptions\ValidatorException;
-use TransactPro\Gateway\Http\Crypto\ResponseDigest;
 use TransactPro\Gateway\Interfaces\HttpClientInterface;
 use TransactPro\Gateway\Interfaces\ResponseInterface;
 use TransactPro\Gateway\Operations\Info\History;
@@ -46,38 +46,39 @@ class GatewayTest extends TestCase
     public function testGateway()
     {
         $gw = new Gateway();
-        $csvResponseMock = $this->createMock(CsvResponse::class);;
+        $csvResponseMock = $this->createMock(CsvResponse::class);
 
-        /** @var HttpClientInterface|\PHPUnit_Framework_MockObject_MockObject $httpClientStub */
+        /** @var HttpClientInterface|MockObject $httpClientStub */
         $httpClientStub = $this->createMock(HttpClientInterface::class);
         $httpClientStub->method('request')->willReturn(new class($csvResponseMock) implements ResponseInterface {
             private $csvResponseMock;
 
-            public function __construct($csvResponseMock) {
+            public function __construct($csvResponseMock)
+            {
                 $this->csvResponseMock = $csvResponseMock;
             }
 
-            function getStatusCode(): int
+            public function getStatusCode(): int
             {
                 return 200;
             }
 
-            function setHeader(string $header, string $value): ResponseInterface
+            public function setHeader(string $header, string $value): ResponseInterface
             {
                 return $this;
             }
 
-            function getHeaders(): array
+            public function getHeaders(): array
             {
                 return [];
             }
 
-            function getHeader(string $header): string
+            public function getHeader(string $header): string
             {
                 return 'aaa';
             }
 
-            function getBody(): string
+            public function getBody(): string
             {
                 return 'holy moly';
             }

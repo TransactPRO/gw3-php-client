@@ -26,11 +26,15 @@ class ObjectLimits
         $this->acqTerminalId = strval($rawDecoded['acq-terminal-id'] ?? null);
 
         if (!empty($rawDecoded['counters']) && is_array($rawDecoded['counters'])) {
-            $this->limits = array_map(function ($v) { return new Limit($v ?? null); }, $rawDecoded['counters']);
+            $this->limits = array_map(function ($v) {
+                return new Limit($v ?? null);
+            }, $rawDecoded['counters']);
         }
 
         if (!empty($rawDecoded['childs']) && is_array($rawDecoded['childs'])) {
-            $this->children = array_map(function ($v) { return new ObjectLimits($v ?? null); }, $rawDecoded['childs']);
+            $this->children = array_map(function ($v) {
+                return new ObjectLimits($v ?? null);
+            }, $rawDecoded['childs']);
         }
     }
 }

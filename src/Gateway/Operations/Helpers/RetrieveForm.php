@@ -35,7 +35,7 @@ class RetrieveForm extends Operation implements OperationInterface
     /**
      * RetrieveForm constructor.
      *
-     * @param Validator         $validator
+     * @param Validator       $validator
      * @param PaymentResponse $paymentResponse
      *
      * @throws RequestException

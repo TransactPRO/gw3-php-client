@@ -38,7 +38,6 @@ class RequestDigestTest extends TestCase
             "{\"amount\":100,\"currency\":\"EUR\"},\"system\":{\"user-ip\":\"127.0.0.1\"}}}"
         );
 
-
         $rc = new ReflectionClass($instance);
         $oProperty = $rc->getProperty('cnonce');
         $oProperty->setAccessible(true);

@@ -67,8 +67,8 @@ class Result extends Operation implements OperationInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return ResultResponse
      * @throws ResponseException
+     * @return ResultResponse
      */
     public function parseResponse(ResponseInterface $response): ResultResponse
     {

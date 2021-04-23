@@ -88,7 +88,7 @@ class Order extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $recipientName
+     * @param string $recipientName
      *
      * @return Order
      */

@@ -82,16 +82,16 @@ interface ResponseInterface
      *
      * @param string $targetClass
      *
-     * @return mixed
      * @throws ResponseException
+     * @return mixed
      */
     public function parseJSON(string $targetClass);
 
     /**
      * Parse response body as a response in CSV format with mandatory headers line
      *
-     * @return CsvResponse
      * @throws ResponseException
+     * @return CsvResponse
      */
     public function parseCsv(): CsvResponse;
 }

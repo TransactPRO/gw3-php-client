@@ -54,7 +54,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  bool $browserJavaEnabled
+     * @param bool $browserJavaEnabled
      *
      * @return System
      */
@@ -66,7 +66,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  bool $browserJavaScriptEnabled
+     * @param bool $browserJavaScriptEnabled
      *
      * @return System
      */
@@ -78,7 +78,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $browserLanguage
+     * @param string $browserLanguage
      *
      * @return System
      */
@@ -90,7 +90,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $browserColorDepth
+     * @param string $browserColorDepth
      *
      * @return System
      */
@@ -102,7 +102,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $browserScreenHeight
+     * @param string $browserScreenHeight
      *
      * @return System
      */
@@ -114,7 +114,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $browserScreenWidth
+     * @param string $browserScreenWidth
      *
      * @return System
      */
@@ -126,7 +126,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $browserTZ
+     * @param string $browserTZ
      *
      * @return System
      */
@@ -138,7 +138,7 @@ class System extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $userAgent
+     * @param string $userAgent
      *
      * @return System
      */

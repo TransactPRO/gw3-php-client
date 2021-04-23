@@ -20,7 +20,7 @@ use TransactPro\Gateway\Interfaces\DataSetInterface;
 class Verify3dEnrollment extends DataSet implements DataSetInterface
 {
     /**
-     * @param  string $pan
+     * @param string $pan
      *
      * @return self
      */
@@ -32,7 +32,7 @@ class Verify3dEnrollment extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $terminalMID
+     * @param string $terminalMID
      *
      * @return self
      */
@@ -44,7 +44,7 @@ class Verify3dEnrollment extends DataSet implements DataSetInterface
     }
 
     /**
-     * @param  string $currency
+     * @param string $currency
      *
      * @return self
      */

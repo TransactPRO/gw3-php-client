@@ -24,7 +24,9 @@ class TransactionHistory
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
         $this->error = !empty($rawDecoded['error']) ? new Error($rawDecoded['error']) : null;
         if (!empty($rawDecoded['history']) && is_array($rawDecoded['history'])) {
-            $this->history = array_map(function($v) { return new HistoryEvent($v ?? null); }, $rawDecoded['history']);
+            $this->history = array_map(function ($v) {
+                return new HistoryEvent($v ?? null);
+            }, $rawDecoded['history']);
         }
     }
 }

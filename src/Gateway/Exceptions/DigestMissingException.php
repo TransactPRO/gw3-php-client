@@ -20,5 +20,8 @@ use Throwable;
  */
 class DigestMissingException extends ResponseException
 {
-    public function __construct($message = "Digest is missing", $code = 0, Throwable $previous = null) { parent::__construct($message, $code, $previous); }
+    public function __construct($message = "Digest is missing", $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }
