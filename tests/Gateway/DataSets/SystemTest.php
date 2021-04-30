@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class SystemTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::SYSTEM_USER_IP => '127.0.0.1',

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class AuthTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::AUTH_DATA_SESSION_ID => 'foo',
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
         $this->assertEquals('aaaa', $auth->getSecretKey());
     }
 
-    public function testGetObjectId()
+    public function testGetObjectId(): void
     {
         $authAccount = new Auth();
         $authAccount->setAccountGUID('3383e58e-9cde-4ffa-85cf-81cd25b2423e');

@@ -22,7 +22,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class ResultTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_IDS => ['123'],
@@ -41,7 +41,7 @@ class ResultTest extends TestCase
         $this->assertEquals($expected, $req->getData());
     }
 
-    public function testParseResultResponse()
+    public function testParseResultResponse(): void
     {
         $expectedDateCreated = DateTime::createFromFormat('Y-m-d H:i:s', "2020-06-10 08:37:22", new DateTimeZone('UTC'));
         $expectedDateFinished = DateTime::createFromFormat('Y-m-d H:i:s', "2020-06-10 08:37:23", new DateTimeZone('UTC'));

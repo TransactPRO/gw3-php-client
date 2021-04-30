@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class FilterDataTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::FILTER_DATA_DT_CREATED_FROM => 1,

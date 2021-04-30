@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $resp = new Response(200, "some answer");
 

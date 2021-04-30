@@ -20,7 +20,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class Enrolled3DTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::DATA_PAN => '123123',
@@ -44,19 +44,19 @@ class Enrolled3DTest extends TestCase
     /**
      * @dataProvider getEnrollmentTestData
      *
-     * @param $body
-     * @param $expectedResult
+     * @param string $body
+     * @param bool   $expectedResult
      *
      * @throws ResponseException
      */
-    public function testParseEnrollmentResponse($body, $expectedResult)
+    public function testParseEnrollmentResponse(string $body, bool $expectedResult): void
     {
         $instance = new Enrolled3D(new Validator(), new Verify3dEnrollment());
         $parsedResponse = $instance->parseResponse(new Response(200, $body));
         $this->assertEquals($expectedResult, $parsedResponse->enrollment);
     }
 
-    public function getEnrollmentTestData()
+    public function getEnrollmentTestData(): array
     {
         return [
             ["{\"enrollment\":\"y\"}", true],

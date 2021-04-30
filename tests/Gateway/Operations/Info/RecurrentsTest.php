@@ -22,7 +22,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class RecurrentsTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_IDS => ['123'],
@@ -41,7 +41,7 @@ class RecurrentsTest extends TestCase
         $this->assertEquals($expected, $req->getData());
     }
 
-    public function testParseRecurringTransactionsResponse()
+    public function testParseRecurringTransactionsResponse(): void
     {
         $expectedDateFinished = DateTime::createFromFormat('Y-m-d H:i:s', "2020-06-09 09:56:53", new DateTimeZone('UTC'));
 

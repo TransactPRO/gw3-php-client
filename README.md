@@ -61,7 +61,7 @@ if (!empty($paymentResponse->error)) {
 }
 
 // Redirect user to received URL
-if ($paymentResp->gw->statusCode === Status::CARD_FORM_URL_SENT) {
+if ($paymentResponse->gw->statusCode === Status::CARD_FORM_URL_SENT) {
     header("Location: {$paymentResponse->gw->redirectUrl}");
 }
 ```
@@ -104,7 +104,7 @@ $response = $gw->process($smsRequest);
 
 // Parse Gateway response as a payment response
 $paymentResponse = $sms->parseResponse($response);
-echo $paymentResp->gw->statusCode === Status::SUCCESS ? "SUCCESS" : "FAILED";
+echo $paymentResponse->gw->statusCode === Status::SUCCESS ? "SUCCESS" : "FAILED";
 ```
 
 ## Documentation
@@ -231,6 +231,16 @@ $message->useToken();
 $message->command()
     ->setPaymentMethodDataSource(Command::DATA_SOURCE_USE_GATEWAY_SAVED_CARDHOLDER_INITIATED)
     ->setPaymentMethodDataToken('<initial gateway-transaction-id>');
+
+$response = $gw->process($message);
+$paymentResponse = $message->parseResponse($response);
+if (
+    !empty($paymentResponse->error) &&
+    $paymentResponse->error->code === ErrorCode::EEC_ACQUIRER_SOFT_DECLINE &&
+    !empty($paymentResponse->gw->redirectUrl)
+) {
+    header("Location: {$paymentResponse->gw->redirectUrl}");
+}
 ```
 
 ### Callback validation

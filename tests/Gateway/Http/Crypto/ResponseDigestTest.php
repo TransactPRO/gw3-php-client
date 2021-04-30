@@ -22,14 +22,14 @@ class ResponseDigestTest extends TestCase
     /**
      * @dataProvider getConstructorErrorCases
      *
-     * @param $authHeader
-     * @param $errorClass
-     * @param $expectedError
+     * @param string $authHeader
+     * @param string $errorClass
+     * @param string $expectedError
      *
      * @throws DigestMismatchException
      * @throws DigestMissingException
      */
-    public function testConstructorFailure($authHeader, $errorClass, $expectedError)
+    public function testConstructorFailure(string $authHeader, string $errorClass, string $expectedError): void
     {
         $this->expectException($errorClass);
         $this->expectExceptionMessage($expectedError);
@@ -37,7 +37,7 @@ class ResponseDigestTest extends TestCase
         new ResponseDigest($authHeader);
     }
 
-    public function getConstructorErrorCases()
+    public function getConstructorErrorCases(): array
     {
         $nonce = base64_encode("1:q");
         $noTsNonce = base64_encode("qqq");
@@ -103,7 +103,7 @@ class ResponseDigestTest extends TestCase
         ];
     }
 
-    public function testConstructorSuccessful()
+    public function testConstructorSuccessful(): void
     {
         $headerValue = "Digest username=bc501eda-e2a1-4e63-9a1e-7a7f6ff4813b, uri=\"/v3.0/sms\", algorithm=SHA-256, " .
             "cnonce=\"MTU5MTYyNTA2MzqydV+lpoF4ZtfSAifxoUretZdAzGaZa97iRogrQ8K/yg==\", " .
@@ -124,15 +124,15 @@ class ResponseDigestTest extends TestCase
     /**
      * @dataProvider getVerifyErrorCases
      *
-     * @param $guid
-     * @param $originalUri
-     * @param $originalCnonce
-     * @param $expectedError
+     * @param string $guid
+     * @param string $originalUri
+     * @param string $originalCnonce
+     * @param string $expectedError
      *
      * @throws DigestMismatchException
      * @throws DigestMissingException
      */
-    public function testVerifyErrors($guid, $originalUri, $originalCnonce, $expectedError)
+    public function testVerifyErrors(string $guid, string $originalUri, string $originalCnonce, string $expectedError): void
     {
         $this->expectException(DigestMismatchException::class);
         $this->expectExceptionMessage($expectedError);
@@ -154,7 +154,7 @@ class ResponseDigestTest extends TestCase
         $responseDigest->verify($guid, "something wrong");
     }
 
-    public function getVerifyErrorCases()
+    public function getVerifyErrorCases(): array
     {
         $validCnonce = base64_decode("MTU5MTg2NjU3Mzo38zMeHvu4qcbhR8X158atP/BB4dDb5DbOMRT656yS7Q==");
         $invalidCnonce = base64_decode("MTU5MTg2NjU3MzpvnttqUse7hfrkUHtPS8tWE1jl0D0G/DgMmEFwbk5/jw==");
@@ -167,7 +167,7 @@ class ResponseDigestTest extends TestCase
         ];
     }
 
-    public function testVerifySuccessFullChecks()
+    public function testVerifySuccessFullChecks(): void
     {
         $body = "{\"acquirer-details\":{},\"error\":{},\"gw\":{\"gateway-transaction-id\":\"37b88436-b69c-45f3-ad26-b945153ad9a8\"," .
             "\"redirect-url\":\"http://api.local/4f1f647d10e8296a2ed4d21e3639f1ee\",\"status-code\":30,\"status-text\":" .
@@ -189,7 +189,7 @@ class ResponseDigestTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testVerifySuccessMinimalChecks()
+    public function testVerifySuccessMinimalChecks(): void
     {
         $body = "{\"acquirer-details\":{},\"error\":{},\"gw\":{\"gateway-transaction-id\":\"37b88436-b69c-45f3-ad26-b945153ad9a8\"," .
             "\"redirect-url\":\"http://api.local/4f1f647d10e8296a2ed4d21e3639f1ee\",\"status-code\":30,\"status-text\":" .
@@ -209,7 +209,7 @@ class ResponseDigestTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testVerifyCallback()
+    public function testVerifyCallback(): void
     {
         $jsonFromPost = "{\"result-data\":{\"gw\":{\"gateway-transaction-id\":\"8d77f986-de7f-4d47-97ef-9de7f8561684\",\"status-code\":7,\"status-text\":\"SUCCESS\"}," .
             "\"error\":{},\"acquirer-details\":{\"eci-sli\":\"503\",\"terminal-mid\":\"3201210\",\"transaction-id\":\"7146311464333929\"," .

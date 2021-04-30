@@ -26,7 +26,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class MotoDmsTest extends TestCase
 {
-    public function testMotoDmsSuccess()
+    public function testMotoDmsSuccess(): void
     {
         $expected = [
             DataSet::PAYMENT_METHOD_DATA_PAN => '123',
@@ -46,7 +46,7 @@ class MotoDmsTest extends TestCase
         $this->assertEquals($expected, $raw->getData());
     }
 
-    public function testMotoDmsValidatorException()
+    public function testMotoDmsValidatorException(): void
     {
         $this->expectException(ValidatorException::class);
 

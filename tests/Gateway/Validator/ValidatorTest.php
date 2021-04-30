@@ -17,7 +17,7 @@ use TransactPro\Gateway\Exceptions\ValidatorException;
 
 class ValidatorTest extends TestCase
 {
-    public function testValidatorSuccess()
+    public function testValidatorSuccess(): void
     {
         $validator = new Validator();
 
@@ -32,7 +32,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidatorThrowExceptionWhenFieldIsNotSet()
+    public function testValidatorThrowExceptionWhenFieldIsNotSet(): void
     {
         $this->expectException(ValidatorException::class);
         $this->expectExceptionMessage("No value by \"data.money-data.currency\" is found.");
@@ -47,7 +47,7 @@ class ValidatorTest extends TestCase
         ]);
     }
 
-    public function testValidatorThrowExceptionWhenTypeIsNotCorrect()
+    public function testValidatorThrowExceptionWhenTypeIsNotCorrect(): void
     {
         $this->expectException(ValidatorException::class);
         $this->expectExceptionMessage("Type of \"100\" should be \"integer\", but is \"string\"");

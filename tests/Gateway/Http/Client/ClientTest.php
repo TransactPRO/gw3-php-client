@@ -11,14 +11,16 @@
 
 namespace TransactPro\Gateway\Http\Client;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\Exceptions\RequestException;
 use TransactPro\Gateway\Interfaces\HttpTransportInterface;
 
 class ClientTest extends TestCase
 {
-    public function testClientSuccess()
+    public function testClientSuccess(): void
     {
+        /** @var HttpTransportInterface|MockObject $stubTransport */
         $stubTransport = $this->createMock(HttpTransportInterface::class);
 
         $stubTransport->method('execute')->willReturn(true);
@@ -35,11 +37,12 @@ class ClientTest extends TestCase
         $this->assertEquals(404, $resp->getStatusCode());
     }
 
-    public function testClientRequestException()
+    public function testClientRequestException(): void
     {
         $this->expectException(RequestException::class);
         $this->expectExceptionMessage('custom error');
 
+        /** @var HttpTransportInterface|MockObject $stubTransport */
         $stubTransport = $this->createMock(HttpTransportInterface::class);
 
         $stubTransport->method('execute')->willReturn(false);

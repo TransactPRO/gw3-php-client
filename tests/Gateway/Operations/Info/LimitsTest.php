@@ -17,7 +17,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class LimitsTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [];
 
@@ -29,7 +29,7 @@ class LimitsTest extends TestCase
         $this->assertEquals($expected, $req->getData());
     }
 
-    public function testParseLimitsResponse()
+    public function testParseLimitsResponse(): void
     {
         $body = "{\"childs\":[{\"childs\":[{\"childs\":[{\"counters\":[{\"counter-type\":\"TR_SUCCESS_AMOUNT\",\"currency\":\"EUR\"," .
             "\"limit\":5000000,\"payment-method-subtype\":\"all\",\"payment-method-type\":\"all\",\"value\":28410}," .

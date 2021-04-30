@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class CommandTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::COMMAND_DATA_FORM_ID => 'a',
