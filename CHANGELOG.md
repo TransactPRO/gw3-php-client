@@ -1,3 +1,7 @@
+##### Version 2.0.1 (2021-06-04)
+
+	Added error codes for soft declines support
+
 ##### Version 2.0.0 (2021-04-23)
 
         Add PHP 8 support in composer.json
