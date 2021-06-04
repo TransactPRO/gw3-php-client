@@ -26,7 +26,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class MotoSmsTest extends TestCase
 {
-    public function testMotoSmsSuccess()
+    public function testMotoSmsSuccess(): void
     {
         $expected = [
             DataSet::PAYMENT_METHOD_DATA_PAN => '123',
@@ -46,7 +46,7 @@ class MotoSmsTest extends TestCase
         $this->assertEquals($expected, $raw->getData());
     }
 
-    public function testMotoSmsValidatorException()
+    public function testMotoSmsValidatorException(): void
     {
         $this->expectException(ValidatorException::class);
 
@@ -55,7 +55,7 @@ class MotoSmsTest extends TestCase
         $motoSms->build();
     }
 
-    public function testParsePaymentResponseSuccessfulRedirect()
+    public function testParsePaymentResponseSuccessfulRedirect(): void
     {
         $body = "{\"acquirer-details\": {},\"error\": {},\"gw\": {\"gateway-transaction-id\": \"965ffd17-1874-48d0-89f3-f2c2f06bf749\"," .
             "\"redirect-url\": \"https://api.url/a4345be5b8a1af9773b8b0642b49ff26\",\"status-code\": 30,\"status-text\": \"INSIDE FORM URL SENT\"}}";

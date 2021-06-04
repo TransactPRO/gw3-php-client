@@ -24,7 +24,6 @@ class RequestDigest extends Digest
      * @param string $username
      * @param string $secret
      * @param string $fullUrl
-     * @param string $qop
      *
      * @throws RequestException
      */

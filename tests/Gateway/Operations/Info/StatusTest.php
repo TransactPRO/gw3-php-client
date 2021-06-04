@@ -20,7 +20,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class StatusTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_IDS => ['123'],
@@ -39,7 +39,7 @@ class StatusTest extends TestCase
         $this->assertEquals($expected, $req->getData());
     }
 
-    public function testParseStatusResponse()
+    public function testParseStatusResponse(): void
     {
         $body = "{\"transactions\":[{\"gateway-transaction-id\":\"cd7b8bdf-3c78-4540-95d0-68018d2aba97\",\"status\":" .
             "[{\"gateway-transaction-id\":\"cd7b8bdf-3c78-4540-95d0-68018d2aba97\",\"status-code\":7,\"status-code-general\":8," .

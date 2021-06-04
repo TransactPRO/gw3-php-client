@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $req = new Request("POST", "/test", ["val" => 123]);
 

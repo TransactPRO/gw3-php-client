@@ -43,7 +43,7 @@ use TransactPro\Gateway\Responses\CsvResponse;
 
 class GatewayTest extends TestCase
 {
-    public function testGateway()
+    public function testGateway(): void
     {
         $gw = new Gateway();
         $csvResponseMock = $this->createMock(CsvResponse::class);
@@ -146,7 +146,7 @@ class GatewayTest extends TestCase
         $this->assertEquals("{\"data\":{\"command-data\":{\"gateway-transaction-ids\":[\"example-key\"]}}}", $req->getPreparedData());
     }
 
-    public function testGatewayException()
+    public function testGatewayException(): void
     {
         $this->expectException(GatewayException::class);
 
@@ -158,7 +158,7 @@ class GatewayTest extends TestCase
         $gw->process($req);
     }
 
-    public function testGenerateRequest()
+    public function testGenerateRequest(): void
     {
         $gw = new Gateway();
 
@@ -172,7 +172,7 @@ class GatewayTest extends TestCase
         $this->assertEquals("{\"data\":{\"command-data\":{\"gateway-transaction-ids\":[\"example-key\"]}}}", $req->getPreparedData());
     }
 
-    public function testGenerateRequestThrowException()
+    public function testGenerateRequestThrowException(): void
     {
         $this->expectException(ValidatorException::class);
 

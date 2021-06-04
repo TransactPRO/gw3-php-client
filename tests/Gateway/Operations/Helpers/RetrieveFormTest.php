@@ -25,7 +25,7 @@ class RetrieveFormTest extends TestCase
      * @throws ReflectionException
      * @throws RequestException
      */
-    public function testConstructorSuccessful()
+    public function testConstructorSuccessful(): void
     {
         $paymentResponse = new PaymentResponse(null);
         $paymentResponse->gw = new GW(['redirect-url' => 'qwerty']);
@@ -35,7 +35,7 @@ class RetrieveFormTest extends TestCase
         $this->assertEquals('qwerty', $this->getPrivatePropertyValue($instance, 'path'));
     }
 
-    public function testConstructorFailure()
+    public function testConstructorFailure(): void
     {
         $this->expectException(RequestException::class);
         $this->expectExceptionMessage("Response doesn't contain link to an HTML form");
@@ -44,13 +44,13 @@ class RetrieveFormTest extends TestCase
     }
 
     /**
-     * @param $object
-     * @param $propertyName
+     * @param RetrieveForm $object
+     * @param string       $propertyName
      *
      * @throws ReflectionException
      * @return mixed
      */
-    protected function getPrivatePropertyValue($object, $propertyName)
+    protected function getPrivatePropertyValue(RetrieveForm $object, string $propertyName)
     {
         $rc = new ReflectionClass($object);
         $property = $rc->getProperty($propertyName);

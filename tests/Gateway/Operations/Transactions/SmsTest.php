@@ -27,7 +27,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class SmsTest extends TestCase
 {
-    public function testSmsSuccess()
+    public function testSmsSuccess(): void
     {
         $expected = [
             DataSet::PAYMENT_METHOD_DATA_PAN => 'qwe123',
@@ -52,7 +52,7 @@ class SmsTest extends TestCase
         $this->assertEquals($expected, $raw->getData());
     }
 
-    public function testSmsValidatorException()
+    public function testSmsValidatorException(): void
     {
         $this->expectException(ValidatorException::class);
 
@@ -61,7 +61,7 @@ class SmsTest extends TestCase
         $sms->build();
     }
 
-    public function testSmsInsideForm()
+    public function testSmsInsideForm(): void
     {
         $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $sms->money()
@@ -73,7 +73,7 @@ class SmsTest extends TestCase
         $this->assertEquals($raw->getPath(), '/sms');
     }
 
-    public function testSmsUseToken()
+    public function testSmsUseToken(): void
     {
         $sms = new Sms(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $sms->command()
@@ -88,7 +88,7 @@ class SmsTest extends TestCase
         $this->assertEquals($raw->getPath(), '/sms');
     }
 
-    public function testParsePaymentResponseSuccessfulAPI()
+    public function testParsePaymentResponseSuccessfulAPI(): void
     {
         $body = "{\"acquirer-details\":{\"dynamic-descriptor\":\"test\",\"eci-sli\":\"648\",\"result-code\":\"000\",\"status-description\":\"Approved\"," .
             "\"status-text\":\"Approved\",\"terminal-mid\":\"5800978\",\"transaction-id\":\"1899493845214315\"},\"error\":{}," .
@@ -126,7 +126,7 @@ class SmsTest extends TestCase
         $this->assertEquals($expectedWarnings, $parsedResponse->warnings);
     }
 
-    public function testParsePaymentResponseSuccessfulRedirect()
+    public function testParsePaymentResponseSuccessfulRedirect(): void
     {
         $body = "{\"acquirer-details\": {},\"error\": {},\"gw\": {\"gateway-transaction-id\": \"965ffd17-1874-48d0-89f3-f2c2f06bf749\"," .
                 "\"redirect-url\": \"https://api.url/a4345be5b8a1af9773b8b0642b49ff26\",\"status-code\": 30,\"status-text\": \"INSIDE FORM URL SENT\"}}";
@@ -141,7 +141,7 @@ class SmsTest extends TestCase
         $this->assertEquals("INSIDE FORM URL SENT", $parsedResponse->gw->statusText);
     }
 
-    public function testParsePaymentResponseError()
+    public function testParsePaymentResponseError(): void
     {
         $body = "{\"acquirer-details\": {},\"error\": {\"code\": 1102,\"message\": \"Invalid pan number. Failed assertion that pan (false) == true\"}," .
             "\"gw\":{\"gateway-transaction-id\": \"33f17d34-3796-45e0-9bba-a771e9d3e504\",\"status-code\": 19,\"status-text\": \"BR VALIDATION FAILED\"}," .

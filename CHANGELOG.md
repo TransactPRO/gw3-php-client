@@ -1,3 +1,8 @@
+##### Version 2.0.0 (2021-04-23)
+
+        Add PHP 8 support in composer.json
+        Drop PHP 7.0 support
+
 ##### Version 1.7.2 (2020-09-02)
 
 	Add merchant-transaction-id to payment response parsing

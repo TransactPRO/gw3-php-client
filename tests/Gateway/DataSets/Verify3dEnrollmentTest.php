@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class Verify3dEnrollmentTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::DATA_PAN => '123123',

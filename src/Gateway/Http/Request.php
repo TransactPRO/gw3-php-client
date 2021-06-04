@@ -94,7 +94,7 @@ class Request
     /**
      * Set prepared JSON string.
      *
-     * @param $preparedData string
+     * @param string $preparedData
      */
     public function setPreparedData($preparedData)
     {

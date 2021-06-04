@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class PaymentMethodTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::PAYMENT_METHOD_DATA_PAN => '123123',

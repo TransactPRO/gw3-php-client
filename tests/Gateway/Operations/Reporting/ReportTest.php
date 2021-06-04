@@ -19,7 +19,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class ReportTest extends TestCase
 {
-    public function testReportSuccessFullData()
+    public function testReportSuccessFullData(): void
     {
         $expected = [
             DataSet::FILTER_DATA_DT_CREATED_FROM => 1,
@@ -42,7 +42,7 @@ class ReportTest extends TestCase
         $this->assertEquals($expected, $raw->getData());
     }
 
-    public function testReportSuccessMinimalData()
+    public function testReportSuccessMinimalData(): void
     {
         $report = new Report(new Validator(), new FilterData());
 
@@ -53,7 +53,7 @@ class ReportTest extends TestCase
         $this->assertEquals([], $raw->getData());
     }
 
-    public function testParseCsvResponse()
+    public function testParseCsvResponse(): void
     {
         $expected = [
             ["aaa" => "1", "bbb" => "2", "ccc" => "3"],

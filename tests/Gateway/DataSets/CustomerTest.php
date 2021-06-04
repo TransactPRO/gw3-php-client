@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class CustomerTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::GENERAL_DATA_CUSTOMER_DATA_BILLING_ADDRESS_CITY => 'a',

@@ -26,7 +26,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class P2PTest extends TestCase
 {
-    public function testP2PSuccess()
+    public function testP2PSuccess(): void
     {
         $expected = [
             DataSet::PAYMENT_METHOD_DATA_PAN => 'qwe123',
@@ -56,7 +56,7 @@ class P2PTest extends TestCase
         $this->assertEquals($expected, $raw->getData());
     }
 
-    public function testP2PValidatorException()
+    public function testP2PValidatorException(): void
     {
         $this->expectException(ValidatorException::class);
 
@@ -65,7 +65,7 @@ class P2PTest extends TestCase
         $order->build();
     }
 
-    public function testP2PInsideForm()
+    public function testP2PInsideForm(): void
     {
         $order = new P2P(new Validator(), new PaymentMethod(), new Money(), new Customer(), new Order(), new System(), new Command());
         $order->money()
@@ -81,7 +81,7 @@ class P2PTest extends TestCase
         $this->assertEquals($raw->getPath(), '/p2p');
     }
 
-    public function testParsePaymentResponseSuccessfulRedirect()
+    public function testParsePaymentResponseSuccessfulRedirect(): void
     {
         $body = "{\"acquirer-details\": {},\"error\": {},\"gw\": {\"gateway-transaction-id\": \"965ffd17-1874-48d0-89f3-f2c2f06bf749\"," .
             "\"redirect-url\": \"https://api.url/a4345be5b8a1af9773b8b0642b49ff26\",\"status-code\": 30,\"status-text\": \"INSIDE FORM URL SENT\"}}";

@@ -16,7 +16,7 @@ use ReflectionClass;
 
 class RequestDigestTest extends TestCase
 {
-    public function testCreateHeader()
+    public function testCreateHeader(): void
     {
         $expected = "Authorization: Digest username=bc501eda-e2a1-4e63-9a1e-7a7f6ff4813b, uri=\"/v3.0/sms\", algorithm=SHA-256, " .
             "cnonce=\"MTU5MTYyNTA2MzqydV+lpoF4ZtfSAifxoUretZdAzGaZa97iRogrQ8K/yg==\", qop=auth-int, " .

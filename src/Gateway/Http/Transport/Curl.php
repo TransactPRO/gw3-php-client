@@ -44,7 +44,7 @@ class Curl implements HttpTransportInterface
     /**
      * cURL resource.
      *
-     * @var resource
+     * @var resource|null|false|mixed
      */
     private $ch;
 
@@ -217,7 +217,7 @@ class Curl implements HttpTransportInterface
      */
     public function close()
     {
-        if (is_resource($this->ch)) {
+        if (!empty($this->ch)) {
             curl_close($this->ch);
 
             $this->ch = null;

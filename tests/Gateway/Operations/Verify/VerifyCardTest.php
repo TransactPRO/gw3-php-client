@@ -18,7 +18,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class VerifyCardTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::DATA_GATEWAY_TRANSACTION_ID => '0123456',

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $expected = [
             DataSet::GENERAL_DATA_ORDER_DATA_ORDER_DESCRIPTION => 'aaa',

@@ -23,7 +23,7 @@ use TransactPro\Gateway\Validator\Validator;
 
 class DmsChargeTest extends TestCase
 {
-    public function testDmsCharge()
+    public function testDmsCharge(): void
     {
         $expected = [
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => "qwe",
@@ -49,7 +49,7 @@ class DmsChargeTest extends TestCase
         $this->assertEquals($expected, $req->getData());
     }
 
-    public function testDmsChargeValidatorException()
+    public function testDmsChargeValidatorException(): void
     {
         $this->expectException(ValidatorException::class);
 
@@ -61,7 +61,7 @@ class DmsChargeTest extends TestCase
         $dmsCharge->build();
     }
 
-    public function testParsePaymentResponseSuccessfulRedirect()
+    public function testParsePaymentResponseSuccessfulRedirect(): void
     {
         $body = "{\"acquirer-details\": {},\"error\": {},\"gw\": {\"gateway-transaction-id\": \"965ffd17-1874-48d0-89f3-f2c2f06bf749\"," .
             "\"redirect-url\": \"https://api.url/a4345be5b8a1af9773b8b0642b49ff26\",\"status-code\": 30,\"status-text\": \"INSIDE FORM URL SENT\"}}";
