@@ -1,3 +1,7 @@
+##### Version 2.0.2 (2021-09-06)
+
+	Added fields for recurring payments: recurring-frequency and recurring expiry.
+
 ##### Version 2.0.1 (2021-06-04)
 
 	Added error codes for soft declines support
