@@ -68,6 +68,8 @@ class Validator
         DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_REFERRING_NAME => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_3D_RETURN_URL => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_RETURN_URL => 'string',
+        DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_EXPIRY => 'string',
+        DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_FREQUENCY => 'string',
 
         // payment data
         DataSet::PAYMENT_METHOD_DATA_PAN => 'string',

@@ -27,6 +27,8 @@ class OrderTest extends TestCase
             DataSet::GENERAL_DATA_ORDER_DATA_MERCHANT_REFERRING_NAME => 'www',
             DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_3D_RETURN_URL => 'hhh',
             DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_RETURN_URL => 'jjj',
+            DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_EXPIRY => 'kkk',
+            DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_FREQUENCY => 'lll',
         ];
 
         $order = new Order();
@@ -39,6 +41,8 @@ class OrderTest extends TestCase
             ->setMerchantReferringName('www')
             ->setCustom3dReturnUrl('hhh')
             ->setCustomReturnUrl('jjj')
+            ->setRecurringExpiry('kkk')
+            ->setRecurringFrequency('lll')
             ->getRaw();
 
         $this->assertEquals($expected, $raw);

@@ -133,4 +133,28 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param string $recurringExpiry
+     *
+     * @return Order
+     */
+    public function setRecurringExpiry(string $recurringExpiry): self
+    {
+        $this->data[ self::GENERAL_DATA_ORDER_DATA_RECURRING_EXPIRY ] = $recurringExpiry;
+
+        return $this;
+    }
+
+    /**
+     * @param string $recurringFrequency
+     *
+     * @return Order
+     */
+    public function setRecurringFrequency(string $recurringFrequency): self
+    {
+        $this->data[ self::GENERAL_DATA_ORDER_DATA_RECURRING_FREQUENCY ] = $recurringFrequency;
+
+        return $this;
+    }
 }
