@@ -17,21 +17,21 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__.'/tests')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setUsingCache(true)
     ->setRiskyAllowed(true)
-    ->setRules(array(
+    ->setRules([
         '@PSR2' => true,
         'binary_operator_spaces' => true,
-        'blank_line_before_return' => true,
+        'blank_line_before_statement' => ['statements' => ['return']],
         'cast_spaces' => true,
-        'header_comment' => array('header' => $header),
+        'header_comment' => ['header' => $header],
         'include' => true,
-        'method_separation' => true,
+        'class_attributes_separation' => ['elements' => ['method' => 'one']],
         'no_blank_lines_after_class_opening' => true,
         'no_blank_lines_after_phpdoc' => true,
         'no_empty_statement' => true,
-        'no_extra_consecutive_blank_lines' => true,
+        'no_extra_blank_lines' => true,
         'no_leading_import_slash' => true,
         'no_leading_namespace_whitespace' => true,
         'no_trailing_comma_in_singleline_array' => true,
@@ -44,10 +44,10 @@ return PhpCsFixer\Config::create()
         'phpdoc_order' => true,
         'phpdoc_scalar' => true,
         'phpdoc_trim' => true,
-        'psr0' => true,
+        'psr_autoloading' => true,
         'single_blank_line_before_namespace' => true,
         'standardize_not_equals' => true,
         'ternary_operator_spaces' => true,
-        'trailing_comma_in_multiline_array' => true,
-    ))->setFinder($finder);
+        'trailing_comma_in_multiline' => true,
+    ])->setFinder($finder);
 
