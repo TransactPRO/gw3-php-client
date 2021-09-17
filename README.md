@@ -350,6 +350,12 @@ Main exception, that can be thrown by the library is the `GatewayException`. Fol
 - `DigestMissingException` - will be thrown if response missing Authorization header (corrupted response).
 - `DigestMismatchException` - will be thrown if response digest validation fail (corrupted response).
 
+### Useful constants
+
+`\TransactPro\Gateway\Responses\Constants\ErrorCode` - error codes
+`\TransactPro\Gateway\Responses\Constants\Status` - transaction statuses
+`\TransactPro\Gateway\Responses\Constants\CardFamily` - card families
+
 ## About
 
 ### Requirements

@@ -17,18 +17,26 @@ class TransactionStatus
 {
     public $error;
     public $gatewayTransactionId;
+
     public $statusCode;
     public $statusCodeGeneral;
     public $statusText;
     public $statusTextGeneral;
 
+    public $cardFamily;
+    public $cardMask;
+
     public function __construct(array $rawDecoded = null)
     {
         $this->error = !empty($rawDecoded['error']) ? new Error($rawDecoded['error']) : null;
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
+
         $this->statusCode = intval($rawDecoded['status'][0]['status-code'] ?? null);
         $this->statusCodeGeneral = intval($rawDecoded['status'][0]['status-code-general'] ?? null);
         $this->statusText = strval($rawDecoded['status'][0]['status-text'] ?? null);
         $this->statusTextGeneral = strval($rawDecoded['status'][0]['status-text-general'] ?? null);
+
+        $this->cardFamily = strval($rawDecoded['status'][0]['card-family'] ?? null);
+        $this->cardMask = strval($rawDecoded['status'][0]['card-mask'] ?? null);
     }
 }
