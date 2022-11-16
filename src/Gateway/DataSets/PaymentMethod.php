@@ -63,4 +63,59 @@ class PaymentMethod extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param  string        $protocolVersion
+     * @return PaymentMethod
+     */
+    public function setExternalMpiProtocolVersion(string $protocolVersion): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_MPI_PROTOCOL] = $protocolVersion;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $dsTransID
+     * @return PaymentMethod
+     */
+    public function setExternalMpiDsTransID(string $dsTransID): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_MPI_DS_TRANS_ID] = $dsTransID;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $xid
+     * @return PaymentMethod
+     */
+    public function setExternalMpiXID(string $xid): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_MPI_XID] = $xid;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $cavv
+     * @return PaymentMethod
+     */
+    public function setExternalMpiCAVV(string $cavv): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_MPI_CAVV] = $cavv;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $transStatus
+     * @return PaymentMethod
+     */
+    public function setExternalMpiTransStatus(string $transStatus): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS] = $transStatus;
+
+        return $this;
+    }
 }
