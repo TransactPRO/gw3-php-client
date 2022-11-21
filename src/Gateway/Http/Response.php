@@ -27,14 +27,14 @@ class Response implements ResponseInterface
     /**
      * HTTP Status Code
      *
-     * @var int
+     * @var null|int
      */
     private $status;
 
     /**
      * Body of the response
      *
-     * @var string
+     * @var null|string
      */
     private $body;
 

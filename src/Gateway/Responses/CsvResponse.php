@@ -60,11 +60,13 @@ class CsvResponse implements Iterator
         return $this->headers;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->current;
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->index++;
@@ -86,11 +88,13 @@ class CsvResponse implements Iterator
         $this->status = true;
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->index;
     }
 
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->status;
@@ -99,6 +103,7 @@ class CsvResponse implements Iterator
     /**
      * @throws ResponseException
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         if ($this->stream === null) {
