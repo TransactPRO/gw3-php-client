@@ -77,6 +77,11 @@ class Validator
         DataSet::PAYMENT_METHOD_DATA_CVV => 'string',
         DataSet::PAYMENT_METHOD_DATA_CARDHOLDER_NAME => 'string',
         DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_DATA => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_PROTOCOL => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_DS_TRANS_ID => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_XID => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_CAVV => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS => 'string',
 
         // money data
         DataSet::MONEY_DATA_AMOUNT => 'integer',

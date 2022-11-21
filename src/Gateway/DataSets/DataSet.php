@@ -68,6 +68,11 @@ abstract class DataSet
     const PAYMENT_METHOD_DATA_CVV = 'data.payment-method-data.cvv';
     const PAYMENT_METHOD_DATA_CARDHOLDER_NAME = 'data.payment-method-data.cardholder-name';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_DATA = 'data.payment-method-data.external-mpi-data';
+    const PAYMENT_METHOD_DATA_EXTERNAL_MPI_PROTOCOL = 'data.payment-method-data.external-mpi-data.protocolVersion';
+    const PAYMENT_METHOD_DATA_EXTERNAL_MPI_DS_TRANS_ID = 'data.payment-method-data.external-mpi-data.dsTransID';
+    const PAYMENT_METHOD_DATA_EXTERNAL_MPI_XID = 'data.payment-method-data.external-mpi-data.xid';
+    const PAYMENT_METHOD_DATA_EXTERNAL_MPI_CAVV = 'data.payment-method-data.external-mpi-data.cavv';
+    const PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS = 'data.payment-method-data.external-mpi-data.transStatus';
 
     // money data
     const MONEY_DATA_AMOUNT = 'data.money-data.amount';
