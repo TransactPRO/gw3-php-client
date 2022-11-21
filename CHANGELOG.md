@@ -1,3 +1,14 @@
+##### Version 2.0.4 (2022-11-21)
+
+	Fix PHP 8.1 warnings
+	PHP 7.1 is no longer supported (in fact, everything less than 7.4 must not be used due to security reasons)
+	Added support for external 3-D Secure. Added methods for PaymentMethod object (when 3-D Secure was completed before the Gateway call):
+	 - setExternalMpiProtocolVersion
+	 - setExternalMpiDsTransID
+	 - setExternalMpiXID
+	 - setExternalMpiCAVV
+	 - setExternalMpiTransStatus
+
 ##### Version 2.0.3 (2021-09-21)
 
 	Added card type and card mask fields to parsed status response.
