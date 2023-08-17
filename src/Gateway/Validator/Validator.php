@@ -70,6 +70,8 @@ class Validator
         DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_RETURN_URL => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_EXPIRY => 'string',
         DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_FREQUENCY => 'string',
+        DataSet::GENERAL_DATA_ORDER_DATA_MITS_EXPECTED => 'boolean',
+        DataSet::GENERAL_DATA_ORDER_DATA_VARIABLE_AMOUNT_RECURRING => 'boolean',
 
         // payment data
         DataSet::PAYMENT_METHOD_DATA_PAN => 'string',
