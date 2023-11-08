@@ -157,4 +157,28 @@ class Order extends DataSet implements DataSetInterface
 
         return $this;
     }
+
+    /**
+     * @param bool $value (default: true)
+     *
+     * @return Order
+     */
+    public function setMitsExpected(bool $value = true): self
+    {
+        $this->data[ self::GENERAL_DATA_ORDER_DATA_MITS_EXPECTED ] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $value (default: true)
+     *
+     * @return Order
+     */
+    public function setVariableAmountRecurring(bool $value = true): self
+    {
+        $this->data[ self::GENERAL_DATA_ORDER_DATA_VARIABLE_AMOUNT_RECURRING ] = $value;
+
+        return $this;
+    }
 }

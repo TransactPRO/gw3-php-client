@@ -29,6 +29,8 @@ class OrderTest extends TestCase
             DataSet::GENERAL_DATA_ORDER_DATA_CUSTOM_RETURN_URL => 'jjj',
             DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_EXPIRY => 'kkk',
             DataSet::GENERAL_DATA_ORDER_DATA_RECURRING_FREQUENCY => 'lll',
+            DataSet::GENERAL_DATA_ORDER_DATA_MITS_EXPECTED => true,
+            DataSet::GENERAL_DATA_ORDER_DATA_VARIABLE_AMOUNT_RECURRING => true,
         ];
 
         $order = new Order();
@@ -43,6 +45,8 @@ class OrderTest extends TestCase
             ->setCustomReturnUrl('jjj')
             ->setRecurringExpiry('kkk')
             ->setRecurringFrequency('lll')
+            ->setMitsExpected()
+            ->setVariableAmountRecurring()
             ->getRaw();
 
         $this->assertEquals($expected, $raw);

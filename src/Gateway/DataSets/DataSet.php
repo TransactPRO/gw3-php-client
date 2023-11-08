@@ -61,6 +61,8 @@ abstract class DataSet
     const GENERAL_DATA_ORDER_DATA_CUSTOM_RETURN_URL = 'data.general-data.order-data.custom-return-url';
     const GENERAL_DATA_ORDER_DATA_RECURRING_EXPIRY = 'data.general-data.order-data.recurring-expiry';
     const GENERAL_DATA_ORDER_DATA_RECURRING_FREQUENCY = 'data.general-data.order-data.recurring-frequency';
+    const GENERAL_DATA_ORDER_DATA_MITS_EXPECTED = 'data.general-data.order-data.mits-expected';
+    const GENERAL_DATA_ORDER_DATA_VARIABLE_AMOUNT_RECURRING = 'data.general-data.order-data.variable-amount-recurring';
 
     // payment data
     const PAYMENT_METHOD_DATA_PAN = 'data.payment-method-data.pan';
