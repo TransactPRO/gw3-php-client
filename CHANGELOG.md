@@ -1,3 +1,9 @@
+##### Version 2.0.5 (2023-11-08)
+
+	Added new fields for order data to satisfy AN5524 requirements:
+	 - mits-expected: must be set to true for UCOF initialization if any subsequent MIT transactions are supposed to be
+	 - variable-amount-recurring: must be set to true for initial recurring transaction if amount will not be fixed for subsequent transactions
+
 ##### Version 2.0.4 (2022-11-21)
 
 	Fix PHP 8.1 warnings
