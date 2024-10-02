@@ -1,3 +1,7 @@
+##### Version 2.0.6 (2024-10-02)
+
+	Add crypto data expired error code
+
 ##### Version 2.0.5 (2023-11-08)
 
 	Added new fields for order data to satisfy AN5524 requirements:
