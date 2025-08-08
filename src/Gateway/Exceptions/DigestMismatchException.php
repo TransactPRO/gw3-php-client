@@ -21,7 +21,7 @@ use Throwable;
  */
 class DigestMismatchException extends ResponseException
 {
-    public function __construct($message = "Digest mismatch", $code = 0, Throwable $previous = null)
+    public function __construct($message = "Digest mismatch", $code = 0, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

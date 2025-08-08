@@ -19,7 +19,7 @@ class TransactionHistory
     public $error;
     public $history = [];
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
         $this->error = !empty($rawDecoded['error']) ? new Error($rawDecoded['error']) : null;

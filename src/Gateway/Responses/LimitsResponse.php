@@ -17,7 +17,7 @@ class LimitsResponse extends GenericResponse
 {
     public $limits;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         parent::__construct($rawDecoded);
         $this->limits = new ObjectLimits($rawDecoded);

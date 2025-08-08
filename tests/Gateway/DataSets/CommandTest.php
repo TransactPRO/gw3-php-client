@@ -22,6 +22,7 @@ class CommandTest extends TestCase
             DataSet::COMMAND_DATA_GATEWAY_TRANSACTION_ID => 'b',
             DataSet::COMMAND_DATA_TERMINAL_MID => 'c',
             DataSet::COMMAND_DATA_CARD_VERIFICATION => 123,
+            DataSet::COMMAND_DATA_PAYMENT_METHOD_TYPE => Command::PAYMENT_METHOD_TYPE_GOOGLE_PAY,
         ];
 
         $command = new Command();
@@ -29,6 +30,7 @@ class CommandTest extends TestCase
             ->setGatewayTransactionID('b')
             ->setTerminalMID('c')
             ->setCardVerificationMode(123)
+            ->setPaymentMethodType(Command::PAYMENT_METHOD_TYPE_GOOGLE_PAY)
             ->getRaw();
 
         $this->assertEquals($expected, $raw);

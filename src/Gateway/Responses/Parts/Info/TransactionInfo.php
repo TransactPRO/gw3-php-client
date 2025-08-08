@@ -32,7 +32,7 @@ class TransactionInfo
     public $statusText;
     public $statusTextGeneral;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->accountGuid = strval($rawDecoded['account-guid'] ?? null);
         $this->acqTerminalId = strval($rawDecoded['acq-terminal-id'] ?? null);

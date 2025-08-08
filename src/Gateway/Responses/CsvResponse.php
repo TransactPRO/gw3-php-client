@@ -39,7 +39,7 @@ class CsvResponse implements Iterator
             throw new ResponseException('Cannot parse CSV data: no headers line');
         }
 
-        $this->headers = str_getcsv($rawHeaders);
+        $this->headers = str_getcsv($rawHeaders, ",", "\"", "\\");
         $this->next();
     }
 
@@ -83,7 +83,7 @@ class CsvResponse implements Iterator
             return;
         }
 
-        $data = str_getcsv(trim($rawLine, "\n"));
+        $data = str_getcsv(trim($rawLine, "\n"), ",", "\"", "\\");
         $this->current = array_combine($this->headers, $data);
         $this->status = true;
     }
