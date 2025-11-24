@@ -243,6 +243,34 @@ if (
 }
 ```
 
+### Using alternative payment methods
+
+To use an alternative payment method (like Google Pay), send a received token AS-IS or data from a decrypted token.
+
+```php
+<?php
+
+use TransactPro\Gateway\DataSets\Command;
+
+// set a corresponding flag that indicates a token provider
+$operation->command()->setPaymentMethodType(Command::PAYMENT_METHOD_TYPE_GOOGLE_PAY);
+
+// option 1: send received token AS-IS
+$operation->paymentMethod()->setToken('<token>');
+
+// option 2: send data from decrypted token
+$operation->paymentMethod()
+    ->setPAN('<card number>')
+    ->setExpire('<card expiry>')
+    ->setCardHolderName('<cardholder name>') // if available
+    ->setExternalTokenCryptogram('<cryptogram from token>') // if available
+    ->setExternalTokenECI('<ECI from token>') // if available
+    ->setExternalTokenTransStatus('<transStatus from token>') // available for Click to Pay
+    ->setExternalTokenDsTransId('<dsTransId from token>') // available for Click to Pay
+    ->setExternalTokenAcsTransId('<acsTransId from token>') // available for Click to Pay
+    ->setExternalTokenCardHolderAuthenticated($decryptedToken['paymentMethodDetails']['assuranceDetails']['cardHolderAuthenticated']); // for Google Pay
+```
+
 ### Callback validation
 
 ```php

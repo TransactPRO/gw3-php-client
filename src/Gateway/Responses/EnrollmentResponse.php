@@ -15,7 +15,7 @@ class EnrollmentResponse extends GenericResponse
 {
     public $enrollment;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         parent::__construct($rawDecoded);
         $this->enrollment = ($rawDecoded['enrollment'] ?? 'n') === 'y';

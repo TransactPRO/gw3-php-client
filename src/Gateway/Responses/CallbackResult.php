@@ -13,7 +13,7 @@ namespace TransactPro\Gateway\Responses;
 
 class CallbackResult extends PaymentResponse
 {
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         parent::__construct($rawDecoded['result-data'] ?? null);
     }

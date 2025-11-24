@@ -16,7 +16,7 @@ class Error
     public $code;
     public $message;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->code = intval($rawDecoded['code'] ?? null);
         $this->message = strval($rawDecoded['message'] ?? null);

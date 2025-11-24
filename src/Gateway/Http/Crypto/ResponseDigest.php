@@ -28,7 +28,7 @@ class ResponseDigest extends Digest
      * @throws DigestMissingException
      * @throws DigestMismatchException
      */
-    public function __construct(string $authorizationHeader = null)
+    public function __construct(?string $authorizationHeader = null)
     {
         if (empty($authorizationHeader)) {
             throw new DigestMissingException();

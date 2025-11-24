@@ -65,6 +65,17 @@ class PaymentMethod extends DataSet implements DataSetInterface
     }
 
     /**
+     * @param  string        $token
+     * @return PaymentMethod
+     */
+    public function setToken(string $token): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_TOKEN] = $token;
+
+        return $this;
+    }
+
+    /**
      * @param  string        $protocolVersion
      * @return PaymentMethod
      */
@@ -115,6 +126,72 @@ class PaymentMethod extends DataSet implements DataSetInterface
     public function setExternalMpiTransStatus(string $transStatus): self
     {
         $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS] = $transStatus;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $cryptogram
+     * @return PaymentMethod
+     */
+    public function setExternalTokenCryptogram(string $cryptogram): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CRYPTOGRAM] = $cryptogram;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $eci
+     * @return PaymentMethod
+     */
+    public function setExternalTokenECI(string $eci): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ECI] = $eci;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $transStatus
+     * @return PaymentMethod
+     */
+    public function setExternalTokenTransStatus(string $transStatus): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_TRANS_STATUS] = $transStatus;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $dsTransId
+     * @return PaymentMethod
+     */
+    public function setExternalTokenDsTransId(string $dsTransId): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DS_TRANS_ID] = $dsTransId;
+
+        return $this;
+    }
+
+    /**
+     * @param  string        $acsTransId
+     * @return PaymentMethod
+     */
+    public function setExternalTokenAcsTransId(string $acsTransId): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ACS_TRANS_ID] = $acsTransId;
+
+        return $this;
+    }
+
+    /**
+     * @param  bool          $value
+     * @return PaymentMethod
+     */
+    public function setExternalTokenCardHolderAuthenticated(bool $value): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_AUTHENTICATED] = $value;
 
         return $this;
     }

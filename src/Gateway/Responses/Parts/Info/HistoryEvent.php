@@ -22,7 +22,7 @@ class HistoryEvent
     public $statusTextNew;
     public $statusTextOld;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->dateUpdated = !empty($rawDecoded['date-updated']) ? DateTime::createFromFormat('Y-m-d H:i:s', $rawDecoded['date-updated'], new DateTimeZone('UTC')) : null;
         $this->statusCodeNew = intval($rawDecoded['status-code-new'] ?? null);

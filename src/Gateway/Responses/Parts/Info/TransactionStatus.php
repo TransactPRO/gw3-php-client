@@ -26,7 +26,7 @@ class TransactionStatus
     public $cardFamily;
     public $cardMask;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->error = !empty($rawDecoded['error']) ? new Error($rawDecoded['error']) : null;
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);

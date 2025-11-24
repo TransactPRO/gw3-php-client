@@ -24,7 +24,7 @@ class TransactionResult
     public $error;
     public $resultData;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->dateCreated = !empty($rawDecoded['date-created']) ? DateTime::createFromFormat('Y-m-d H:i:s', $rawDecoded['date-created'], new DateTimeZone('UTC')) : null;
         $this->dateFinished = !empty($rawDecoded['date-finished']) ? DateTime::createFromFormat('Y-m-d H:i:s', $rawDecoded['date-finished'], new DateTimeZone('UTC')) : null;

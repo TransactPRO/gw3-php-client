@@ -11,6 +11,7 @@
 
 namespace TransactPro\Gateway\Validator;
 
+use TransactPro\Gateway\DataSets\Command;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\Exceptions\ValidatorException;
 
@@ -37,6 +38,7 @@ class Validator
         DataSet::COMMAND_DATA_CARD_VERIFICATION => 'integer',
         DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE => 'integer',
         DataSet::COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN => 'string',
+        DataSet::COMMAND_DATA_PAYMENT_METHOD_TYPE => 'string',
 
         // general data
         DataSet::GENERAL_DATA_CUSTOMER_DATA_EMAIL => 'string',
@@ -78,12 +80,17 @@ class Validator
         DataSet::PAYMENT_METHOD_DATA_EXPIRE => 'string',
         DataSet::PAYMENT_METHOD_DATA_CVV => 'string',
         DataSet::PAYMENT_METHOD_DATA_CARDHOLDER_NAME => 'string',
-        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_DATA => 'string',
         DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_PROTOCOL => 'string',
         DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_DS_TRANS_ID => 'string',
         DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_XID => 'string',
         DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_CAVV => 'string',
         DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CRYPTOGRAM => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ECI => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_TRANS_STATUS => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DS_TRANS_ID => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ACS_TRANS_ID => 'string',
+        DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_AUTHENTICATED => 'boolean',
 
         // money data
         DataSet::MONEY_DATA_AMOUNT => 'integer',
@@ -137,18 +144,20 @@ class Validator
         for ($i = 0, $c = count($mandatory); $i < $c; $i++) {
             $key = $mandatory[$i];
 
-            if (!isset($data[$key])) {
+            if (!$this->validateData($data, $key)) {
                 $errors[] = "No value by \"$key\" is found.";
                 continue;
             }
-            $value = $data[$key];
 
-            $realType = gettype($value);
-            $expectedType = $this->fieldTypes[$key];
+            if (isset($data[$key])) {
+                $value = $data[$key];
+                $realType = gettype($value);
+                $expectedType = $this->fieldTypes[$key];
 
-            if ($realType !== $expectedType) {
-                $errors[] = "Type of \"$value\" should be \"$expectedType\", but is \"$realType\"";
-                continue;
+                if ($realType !== $expectedType) {
+                    $errors[] = "Type of \"$value\" should be \"$expectedType\", but is \"$realType\"";
+                    continue;
+                }
             }
         }
 
@@ -157,5 +166,32 @@ class Validator
         }
 
         return true;
+    }
+
+    private function validateData(array $data, string $key): bool
+    {
+        if (isset($data[$key])) {
+            return true;
+        }
+
+        $paymentMethodType = $data[DataSet::COMMAND_DATA_PAYMENT_METHOD_TYPE] ?? Command::PAYMENT_METHOD_TYPE_CARD;
+        if ($paymentMethodType !== Command::PAYMENT_METHOD_TYPE_CARD) {
+            static $cardDataKeys = [
+                DataSet::PAYMENT_METHOD_DATA_PAN,
+                DataSet::PAYMENT_METHOD_DATA_EXPIRE,
+                DataSet::PAYMENT_METHOD_DATA_CVV,
+            ];
+
+            $tokenPassed = isset($data[DataSet::PAYMENT_METHOD_DATA_TOKEN]);
+            if ($tokenPassed) {
+                // encrypted token is passed intead of plain card data
+                return in_array($key, $cardDataKeys);
+            } else {
+                // decrypted token doesn't contain CVV
+                return $key === DataSet::PAYMENT_METHOD_DATA_CVV;
+            }
+        }
+
+        return false;
     }
 }

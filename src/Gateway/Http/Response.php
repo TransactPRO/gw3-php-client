@@ -169,7 +169,7 @@ class Response implements ResponseInterface
     /**
      * @param ResponseDigest|null $digest
      */
-    public function setDigest(ResponseDigest $digest = null)
+    public function setDigest(?ResponseDigest $digest = null)
     {
         $this->digest = $digest;
     }

@@ -20,7 +20,7 @@ class PaymentResponse extends GenericResponse
     public $gw;
     public $warnings;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         parent::__construct($rawDecoded);
         $this->acquirerDetails = !empty($rawDecoded['acquirer-details']) ? new AcquirerDetails($rawDecoded['acquirer-details']) : null;

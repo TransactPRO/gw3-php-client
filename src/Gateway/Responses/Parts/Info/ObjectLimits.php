@@ -19,7 +19,7 @@ class ObjectLimits
     public $limits = [];
     public $children = [];
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->type = strval($rawDecoded['type'] ?? null);
         $this->title = strval($rawDecoded['title'] ?? null);

@@ -21,7 +21,7 @@ class AcquirerDetails
     public $terminalMid;
     public $transactionId;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->dynamicDescriptor = strval($rawDecoded['dynamic-descriptor'] ?? null);
         $this->eciSli = strval($rawDecoded['eci-sli'] ?? null);

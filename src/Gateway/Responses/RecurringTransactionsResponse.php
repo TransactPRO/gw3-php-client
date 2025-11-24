@@ -17,7 +17,7 @@ class RecurringTransactionsResponse extends GenericResponse
 {
     public $transactions = [];
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         parent::__construct($rawDecoded);
         if (!empty($rawDecoded['transactions']) && is_array($rawDecoded['transactions'])) {

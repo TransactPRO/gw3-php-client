@@ -20,7 +20,7 @@ class Limit
     public $paymentMethodType;
     public $value;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->counterType = strval($rawDecoded['counter-type'] ?? null);
         $this->currency = strval($rawDecoded['currency'] ?? null);

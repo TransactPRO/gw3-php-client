@@ -31,6 +31,11 @@ class Command extends DataSet implements DataSetInterface
     const DATA_SOURCE_USE_GATEWAY_SAVED_MERCHANT_INITIATED = 5;
     const DATA_SOURCE_USE_MERCHANT_SAVED_MERCHANT_INITIATED = 6;
 
+    const PAYMENT_METHOD_TYPE_CARD = 'cc';
+    const PAYMENT_METHOD_TYPE_GOOGLE_PAY = 'google_pay';
+    const PAYMENT_METHOD_TYPE_APPLE_PAY = 'apple_pay';
+    const PAYMENT_METHOD_TYPE_CLICK2PAY = 'click2pay';
+
     /**
      * @param  string  $gatewayTransactionID
      * @return Command
@@ -93,6 +98,17 @@ class Command extends DataSet implements DataSetInterface
     public function setPaymentMethodDataToken(string $paymentMethodDataToken): self
     {
         $this->data[ self::COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN ] = $paymentMethodDataToken;
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $paymentMethodType
+     * @return Command
+     */
+    public function setPaymentMethodType(string $paymentMethodType): self
+    {
+        $this->data[ self::COMMAND_DATA_PAYMENT_METHOD_TYPE ] = $paymentMethodType;
 
         return $this;
     }

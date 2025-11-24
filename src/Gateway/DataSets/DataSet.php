@@ -28,6 +28,7 @@ abstract class DataSet
     const COMMAND_DATA_CARD_VERIFICATION = 'data.command-data.card-verification';
     const COMMAND_DATA_PAYMENT_METHOD_DATA_SOURCE = 'data.command-data.payment-method-data-source';
     const COMMAND_DATA_PAYMENT_METHOD_DATA_TOKEN = 'data.command-data.payment-method-data-token';
+    const COMMAND_DATA_PAYMENT_METHOD_TYPE = 'data.command-data.payment-method-type';
 
     // customer data
     const GENERAL_DATA_CUSTOMER_DATA_EMAIL = 'data.general-data.customer-data.email';
@@ -69,12 +70,20 @@ abstract class DataSet
     const PAYMENT_METHOD_DATA_EXPIRE = 'data.payment-method-data.exp-mm-yy';
     const PAYMENT_METHOD_DATA_CVV = 'data.payment-method-data.cvv';
     const PAYMENT_METHOD_DATA_CARDHOLDER_NAME = 'data.payment-method-data.cardholder-name';
+    const PAYMENT_METHOD_DATA_TOKEN = 'data.payment-method-data.token';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_DATA = 'data.payment-method-data.external-mpi-data';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_PROTOCOL = 'data.payment-method-data.external-mpi-data.protocolVersion';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_DS_TRANS_ID = 'data.payment-method-data.external-mpi-data.dsTransID';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_XID = 'data.payment-method-data.external-mpi-data.xid';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_CAVV = 'data.payment-method-data.external-mpi-data.cavv';
     const PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS = 'data.payment-method-data.external-mpi-data.transStatus';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DATA = 'data.payment-method-data.external-token-data';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CRYPTOGRAM = 'data.payment-method-data.external-token-data.cryptogram';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ECI = 'data.payment-method-data.external-token-data.eci';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_TRANS_STATUS = 'data.payment-method-data.external-token-data.transStatus';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DS_TRANS_ID = 'data.payment-method-data.external-token-data.dsTransID';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ACS_TRANS_ID = 'data.payment-method-data.external-token-data.acsTransID';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_AUTHENTICATED = 'data.payment-method-data.external-token-data.cardHolderAuthenticated';
 
     // money data
     const MONEY_DATA_AMOUNT = 'data.money-data.amount';

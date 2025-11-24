@@ -21,7 +21,7 @@ class GW
     public $statusCode;
     public $statusText;
 
-    public function __construct(array $rawDecoded = null)
+    public function __construct(?array $rawDecoded = null)
     {
         $this->gatewayTransactionId = strval($rawDecoded['gateway-transaction-id'] ?? null);
         $this->merchantTransactionId = strval($rawDecoded['merchant-transaction-id'] ?? null);
