@@ -67,7 +67,7 @@ class ResponseDigest extends Digest
             'qop' => [self::QOP_AUTH, self::QOP_AUTH_INT],
         ];
         foreach ($headerValues as $key => $value) {
-            if (!isset($value) || !is_string($value)) {
+            if (!isset($value)) {
                 throw new DigestMismatchException("Digest mismatch: empty value for $key");
             }
 

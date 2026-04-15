@@ -12,6 +12,7 @@
 namespace TransactPro\Gateway\Http\Crypto;
 
 use PHPUnit\Framework\TestCase;
+use Throwable;
 use TransactPro\Gateway\Exceptions\DigestMismatchException;
 use TransactPro\Gateway\Exceptions\DigestMissingException;
 use TransactPro\Gateway\Responses\CallbackResult;
@@ -19,25 +20,22 @@ use TransactPro\Gateway\Responses\GatewayResponse;
 
 class ResponseDigestTest extends TestCase
 {
-    /**
-     * @dataProvider getConstructorErrorCases
-     *
-     * @param string $authHeader
-     * @param string $errorClass
-     * @param string $expectedError
-     *
-     * @throws DigestMismatchException
-     * @throws DigestMissingException
-     */
-    public function testConstructorFailure(string $authHeader, string $errorClass, string $expectedError): void
+    public function testConstructorFailure(): void
     {
-        $this->expectException($errorClass);
-        $this->expectExceptionMessage($expectedError);
+        foreach (self::getConstructorErrorCases() as $case) {
+            [$authHeader, $errorClass, $expectedError] = $case;
 
-        new ResponseDigest($authHeader);
+            try {
+                new ResponseDigest($authHeader);
+                $this->fail(sprintf("Expected exception %s was not thrown", $errorClass));
+            } catch (Throwable $exception) {
+                $this->assertInstanceOf($errorClass, $exception);
+                $this->assertSame($expectedError, $exception->getMessage());
+            }
+        }
     }
 
-    public function getConstructorErrorCases(): array
+    public static function getConstructorErrorCases(): array
     {
         $nonce = base64_encode("1:q");
         $noTsNonce = base64_encode("qqq");
@@ -121,40 +119,36 @@ class ResponseDigestTest extends TestCase
         $this->assertEquals(base64_decode("MTU5MTYyNDgwNzoUte6YsXIJmUo1EsA4yrYDCVbPrvCrEtqGq6CHTMhImg=="), $digest->getSnonce());
     }
 
-    /**
-     * @dataProvider getVerifyErrorCases
-     *
-     * @param string $guid
-     * @param string $originalUri
-     * @param string $originalCnonce
-     * @param string $expectedError
-     *
-     * @throws DigestMismatchException
-     * @throws DigestMissingException
-     */
-    public function testVerifyErrors(string $guid, string $originalUri, string $originalCnonce, string $expectedError): void
+    public function testVerifyErrors(): void
     {
-        $this->expectException(DigestMismatchException::class);
-        $this->expectExceptionMessage($expectedError);
+        foreach (self::getVerifyErrorCases() as $case) {
+            [$guid, $originalUri, $originalCnonce, $expectedError] = $case;
 
-        $body = "{\"acquirer-details\":{},\"error\":{},\"gw\":{\"gateway-transaction-id\":\"37b88436-b69c-45f3-ad26-b945153ad9a8\"," .
-            "\"redirect-url\":\"http://api.local/4f1f647d10e8296a2ed4d21e3639f1ee\",\"status-code\":30,\"status-text\":" .
-            "\"INSIDE FORM URL SENT\"},\"warnings\":[\"Soon counters will be exceeded for the merchant\",\"Soon counters will be exceeded " .
-            "for the account\"]}";
+            try {
+                $body = "{\"acquirer-details\":{},\"error\":{},\"gw\":{\"gateway-transaction-id\":\"37b88436-b69c-45f3-ad26-b945153ad9a8\"," .
+                    "\"redirect-url\":\"http://api.local/4f1f647d10e8296a2ed4d21e3639f1ee\",\"status-code\":30,\"status-text\":" .
+                    "\"INSIDE FORM URL SENT\"},\"warnings\":[\"Soon counters will be exceeded for the merchant\",\"Soon counters will be exceeded " .
+                    "for the account\"]}";
 
-        $responseHeader = "Digest username=bc501eda-e2a1-4e63-9a1e-7a7f6ff4813b, uri=\"/v3.0/sms\", algorithm=SHA-256, " .
-            "cnonce=\"MTU5MTg2NjU3Mzo38zMeHvu4qcbhR8X158atP/BB4dDb5DbOMRT656yS7Q==\", " .
-            "snonce=\"MTU5MTg2NjU3MzpvnttqUse7hfrkUHtPS8tWE1jl0D0G/DgMmEFwbk5/jw==\", qop=auth-int, " .
-            "response=\"624478f45d33bbadc7cf0ae9b34462efd7b9736111f295e6330fe0bc3b20acda\"";
+                $responseHeader = "Digest username=bc501eda-e2a1-4e63-9a1e-7a7f6ff4813b, uri=\"/v3.0/sms\", algorithm=SHA-256, " .
+                    "cnonce=\"MTU5MTg2NjU3Mzo38zMeHvu4qcbhR8X158atP/BB4dDb5DbOMRT656yS7Q==\", " .
+                    "snonce=\"MTU5MTg2NjU3MzpvnttqUse7hfrkUHtPS8tWE1jl0D0G/DgMmEFwbk5/jw==\", qop=auth-int, " .
+                    "response=\"624478f45d33bbadc7cf0ae9b34462efd7b9736111f295e6330fe0bc3b20acda\"";
 
-        $responseDigest = new ResponseDigest($responseHeader);
-        $responseDigest->setOriginalUri($originalUri);
-        $responseDigest->setOriginalCnonce($originalCnonce);
-        $responseDigest->setBody($body);
-        $responseDigest->verify($guid, "something wrong");
+                $responseDigest = new ResponseDigest($responseHeader);
+                $responseDigest->setOriginalUri($originalUri);
+                $responseDigest->setOriginalCnonce($originalCnonce);
+                $responseDigest->setBody($body);
+                $responseDigest->verify($guid, "something wrong");
+                $this->fail("Expected exception " . DigestMismatchException::class . " was not thrown");
+            } catch (Throwable $exception) {
+                $this->assertInstanceOf(DigestMismatchException::class, $exception);
+                $this->assertSame($expectedError, $exception->getMessage());
+            }
+        }
     }
 
-    public function getVerifyErrorCases(): array
+    public static function getVerifyErrorCases(): array
     {
         $validCnonce = base64_decode("MTU5MTg2NjU3Mzo38zMeHvu4qcbhR8X158atP/BB4dDb5DbOMRT656yS7Q==");
         $invalidCnonce = base64_decode("MTU5MTg2NjU3MzpvnttqUse7hfrkUHtPS8tWE1jl0D0G/DgMmEFwbk5/jw==");
@@ -186,7 +180,7 @@ class ResponseDigestTest extends TestCase
         $responseDigest->verify("bc501eda-e2a1-4e63-9a1e-7a7f6ff4813b", "tPMOogw7YBumh6RpXxi2nvGW0C9lJq3L");
 
         // no exception means success
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     public function testVerifySuccessMinimalChecks(): void
@@ -206,7 +200,7 @@ class ResponseDigestTest extends TestCase
         $responseDigest->verify("bc501eda-e2a1-4e63-9a1e-7a7f6ff4813b", "tPMOogw7YBumh6RpXxi2nvGW0C9lJq3L");
 
         // no exception means success
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     public function testVerifyCallback(): void

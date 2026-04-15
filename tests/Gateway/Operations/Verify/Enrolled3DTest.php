@@ -14,7 +14,6 @@ namespace TransactPro\Gateway\Operations\Verify;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\DataSet;
 use TransactPro\Gateway\DataSets\Verify3dEnrollment;
-use TransactPro\Gateway\Exceptions\ResponseException;
 use TransactPro\Gateway\Http\Response;
 use TransactPro\Gateway\Validator\Validator;
 
@@ -41,22 +40,18 @@ class Enrolled3DTest extends TestCase
         $this->assertEquals($expected, $req->getData());
     }
 
-    /**
-     * @dataProvider getEnrollmentTestData
-     *
-     * @param string $body
-     * @param bool   $expectedResult
-     *
-     * @throws ResponseException
-     */
-    public function testParseEnrollmentResponse(string $body, bool $expectedResult): void
+    public function testParseEnrollmentResponse(): void
     {
-        $instance = new Enrolled3D(new Validator(), new Verify3dEnrollment());
-        $parsedResponse = $instance->parseResponse(new Response(200, $body));
-        $this->assertEquals($expectedResult, $parsedResponse->enrollment);
+        foreach (self::getEnrollmentTestData() as $case) {
+            [$body, $expectedResult] = $case;
+
+            $instance = new Enrolled3D(new Validator(), new Verify3dEnrollment());
+            $parsedResponse = $instance->parseResponse(new Response(200, $body));
+            $this->assertEquals($expectedResult, $parsedResponse->enrollment);
+        }
     }
 
-    public function getEnrollmentTestData(): array
+    public static function getEnrollmentTestData(): array
     {
         return [
             ["{\"enrollment\":\"y\"}", true],

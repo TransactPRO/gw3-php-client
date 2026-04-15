@@ -477,7 +477,7 @@ class Gateway
     public function process(Request $request)
     {
         $payload = $request->getPreparedData();
-        if (empty($payload) && strtolower($request->getMethod()) !== 'GET') {
+        if (empty($payload) && strtolower($request->getMethod()) !== 'get') {
             $payload = $this->generatePayload($request->getData());
             $request->setPreparedData($payload);
         }

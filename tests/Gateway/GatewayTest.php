@@ -11,7 +11,6 @@
 
 namespace TransactPro\Gateway;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TransactPro\Gateway\DataSets\Auth;
 use TransactPro\Gateway\Exceptions\GatewayException;
@@ -46,63 +45,21 @@ class GatewayTest extends TestCase
     public function testGateway(): void
     {
         $gw = new Gateway();
-        $csvResponseMock = $this->createMock(CsvResponse::class);
+        $csvResponseStub = $this->createStub(CsvResponse::class);
 
-        /** @var HttpClientInterface|MockObject $httpClientStub */
-        $httpClientStub = $this->createMock(HttpClientInterface::class);
-        $httpClientStub->method('request')->willReturn(new class($csvResponseMock) implements ResponseInterface {
-            private $csvResponseMock;
+        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseStub->method('getStatusCode')->willReturn(200);
+        $responseStub->method('setHeader')->willReturnSelf();
+        $responseStub->method('getHeaders')->willReturn([]);
+        $responseStub->method('getHeader')->willReturn('aaa');
+        $responseStub->method('getBody')->willReturn('holy moly');
+        $responseStub->method('isSuccessful')->willReturn(true);
+        $responseStub->method('getDigest')->willReturn(null);
+        $responseStub->method('parseJSON')->willReturn(null);
+        $responseStub->method('parseCsv')->willReturn($csvResponseStub);
 
-            public function __construct($csvResponseMock)
-            {
-                $this->csvResponseMock = $csvResponseMock;
-            }
-
-            public function getStatusCode(): int
-            {
-                return 200;
-            }
-
-            public function setHeader(string $header, string $value): ResponseInterface
-            {
-                return $this;
-            }
-
-            public function getHeaders(): array
-            {
-                return [];
-            }
-
-            public function getHeader(string $header): string
-            {
-                return 'aaa';
-            }
-
-            public function getBody(): string
-            {
-                return 'holy moly';
-            }
-
-            public function isSuccessful(): bool
-            {
-                return true;
-            }
-
-            public function getDigest()
-            {
-                return null;
-            }
-
-            public function parseJSON(string $targetClass)
-            {
-                return null;
-            }
-
-            public function parseCsv(): CsvResponse
-            {
-                return $this->csvResponseMock;
-            }
-        });
+        $httpClientStub = $this->createStub(HttpClientInterface::class);
+        $httpClientStub->method('request')->willReturn($responseStub);
 
         $gw->setHttpClient($httpClientStub);
 
