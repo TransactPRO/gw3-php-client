@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-  <coverage>
-    <include>
-      <directory suffix=".php">src/Gateway/</directory>
-    </include>
-  </coverage>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/13.1/phpunit.xsd">
   <testsuites>
     <testsuite name="GW3 Test Suite">
       <directory>tests/Gateway/</directory>
@@ -13,4 +8,9 @@
   <php>
     <ini name="date.timezone" value="UTC"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">src/Gateway/</directory>
+    </include>
+  </source>
 </phpunit>

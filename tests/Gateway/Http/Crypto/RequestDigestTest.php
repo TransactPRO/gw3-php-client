@@ -40,7 +40,9 @@ class RequestDigestTest extends TestCase
 
         $rc = new ReflectionClass($instance);
         $oProperty = $rc->getProperty('cnonce');
-        $oProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $oProperty->setAccessible(true);
+        }
         $oProperty->setValue($instance, base64_decode("MTU5MTYyNTA2MzqydV+lpoF4ZtfSAifxoUretZdAzGaZa97iRogrQ8K/yg=="));
 
         $actual = $instance->createHeader();

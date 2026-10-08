@@ -217,10 +217,9 @@ class Curl implements HttpTransportInterface
      */
     public function close()
     {
-        if (!empty($this->ch)) {
+        if (!empty($this->ch) && PHP_VERSION_ID < 80500) {
             curl_close($this->ch);
-
-            $this->ch = null;
         }
+        $this->ch = null;
     }
 }
