@@ -80,6 +80,7 @@ abstract class DataSet
     const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DATA = 'data.payment-method-data.external-token-data';
     const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CRYPTOGRAM = 'data.payment-method-data.external-token-data.cryptogram';
     const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ECI = 'data.payment-method-data.external-token-data.eci';
+    const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CAVV = 'data.payment-method-data.external-token-data.cavv';
     const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_TRANS_STATUS = 'data.payment-method-data.external-token-data.transStatus';
     const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DS_TRANS_ID = 'data.payment-method-data.external-token-data.dsTransID';
     const PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ACS_TRANS_ID = 'data.payment-method-data.external-token-data.acsTransID';

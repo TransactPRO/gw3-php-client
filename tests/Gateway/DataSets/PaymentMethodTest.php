@@ -30,6 +30,7 @@ class PaymentMethodTest extends TestCase
             DataSet::PAYMENT_METHOD_DATA_EXTERNAL_MPI_TRANS_STATUS => 'Y',
             DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CRYPTOGRAM => 'qqq',
             DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ECI => '07',
+            DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CAVV => 'token-cavv',
             DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_TRANS_STATUS => 'Y',
             DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_DS_TRANS_ID => '123-qwe-asd',
             DataSet::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_ACS_TRANS_ID => 'zxc-asd-qwe',
@@ -50,6 +51,7 @@ class PaymentMethodTest extends TestCase
             ->setExternalMpiTransStatus('Y')
             ->setExternalTokenCryptogram('qqq')
             ->setExternalTokenECI('07')
+            ->setExternalTokenCAVV('token-cavv')
             ->setExternalTokenTransStatus('Y')
             ->setExternalTokenDsTransId('123-qwe-asd')
             ->setExternalTokenAcsTransId('zxc-asd-qwe')
