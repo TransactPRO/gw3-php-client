@@ -152,6 +152,13 @@ class PaymentMethod extends DataSet implements DataSetInterface
         return $this;
     }
 
+    public function setExternalTokenCAVV(string $cavv): self
+    {
+        $this->data[self::PAYMENT_METHOD_DATA_EXTERNAL_TOKEN_CAVV] = $cavv;
+
+        return $this;
+    }
+
     /**
      * @param  string        $transStatus
      * @return PaymentMethod
