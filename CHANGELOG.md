@@ -1,3 +1,8 @@
+##### Version 2.0.8 (2026-10-09)
+
+	Add CAVV to external token fields
+	Add PHP 8.5 support; remove PHP 7.2 support; add EEC_TERMINAL_LOCKED error code
+
 ##### Version 2.0.7 (2025-11-24)
 
 	Add alternative payment methods support (like Google Pay)
